@@ -10,7 +10,8 @@ public class PlayerController : MonoBehaviour
     private float idleX, idleY;
     private Vector2 _moveInput;
     public int jumpTime;
-    private int jumpCounter;
+    public int jumpCounter;
+    private bool jump;
     public LayerMask whatIsGround;
     public Transform groundPoint;
     // private PlayerStates _currentstate;
@@ -19,6 +20,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         jumpCounter = jumpTime;
+        jump = false;
     }
     
     
@@ -54,29 +56,37 @@ public class PlayerController : MonoBehaviour
     private bool IsGround()
     {
         RaycastHit hit;
-        return Physics.Raycast(groundPoint.position, Vector3.down, out hit, .3f, whatIsGround);
+        return Physics.Raycast(groundPoint.position, Vector3.down, out hit, .1f, whatIsGround);
     }
 
     private void Jump()
     {
-        
-        // AnimatorStateInfo stateInfo;
         if (Input.GetButtonDown("Jump"))
         {
+            anim.SetBool("isIdle", false);
+            
             if (IsGround())
             {
                 anim.SetBool("isJumping", true);
-                rb.velocity += new Vector3(0f, jumpForce, 0f);
+                // rb.velocity += new Vector3(0f, jumpForce, 0f);
+                rb.AddForce(transform.up * jumpForce,ForceMode.VelocityChange);
+                jumpCounter = jumpTime;
+            }
+            else if (jumpCounter > 0)
+            {
+                anim.SetBool("isJumping", true);
+                // rb.velocity += new Vector3(0f, jumpForce, 0f);
+                rb.AddForce(transform.up * jumpForce,ForceMode.VelocityChange);
+                jumpCounter--;
             }
         }
-        
-        // anim.SetBool("isIdle",false);
-        // if (IsGround())
-        // {
-        //     anim.SetBool("isIdle",true);
-        //     anim.SetBool("isJumping", false);
-        // }
+    }
 
+    public void finishJump()
+    {
+        Debug.Log("yes");
+        anim.SetBool("isJumping", false);
+        anim.SetBool("isIdle", true);
     }
     
     
