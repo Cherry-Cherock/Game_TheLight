@@ -36,6 +36,7 @@ public class PlayerController : MonoBehaviour
             anim.SetBool("isJumping", false);
             anim.SetBool("isIdle", true);
         }
+        BasicMovement();
     }
 
     private void init()
@@ -44,14 +45,12 @@ public class PlayerController : MonoBehaviour
         jumpCounter = jumpTime;
         jump = false;
         inputSystem.Player.Jump.performed += Jump;
-        inputSystem.Player.Movement.performed += BasicMovement;
     }
 
-    public void BasicMovement(InputAction.CallbackContext ctx)
+    public void BasicMovement()
     {
-        _moveInput = ctx.ReadValue<Vector2>();
+        _moveInput = inputSystem.Player.Movement.ReadValue<Vector2>();
         _moveInput.Normalize();
-
         rb.velocity = new Vector3(_moveInput.x * moveSpeed, rb.velocity.y, _moveInput.y * moveSpeed);
         if (_moveInput != Vector2.zero)
         {
