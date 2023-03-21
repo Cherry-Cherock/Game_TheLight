@@ -1,26 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
-using DefaultNamespace;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public Rigidbody rb;
+    //---------角色设置--------------------
     public float moveSpeed, jumpForce;
+    public int jumpTime;
+    public Transform groundPoint;
+    public Animator anim;
+    //------------------------------------
+    public Rigidbody rb;
     private float idleX, idleY;
     private Vector2 _moveInput;
-    public int jumpTime;
-    public int jumpCounter;
+    private int jumpCounter;
     private bool jump;
     public LayerMask whatIsGround;
-    public Transform groundPoint;
-    // private PlayerStates _currentstate;
-    // public  PlayerStates Currentstate => _currentstate;
-    public Animator anim;
+    
+    
     void Start()
     {
-        jumpCounter = jumpTime;
-        jump = false;
+        init();
     }
     
     
@@ -30,6 +28,11 @@ public class PlayerController : MonoBehaviour
         Jump();
     }
 
+    private void init()
+    {
+        jumpCounter = jumpTime;
+        jump = false;
+    }
 
     private void BasicMovement()
     {
@@ -64,7 +67,6 @@ public class PlayerController : MonoBehaviour
         if (Input.GetButtonDown("Jump"))
         {
             anim.SetBool("isIdle", false);
-            
             if (IsGround())
             {
                 anim.SetBool("isJumping", true);
@@ -74,20 +76,30 @@ public class PlayerController : MonoBehaviour
             }
             else if (jumpCounter > 0)
             {
-                anim.SetBool("isJumping", true);
-                // rb.velocity += new Vector3(0f, jumpForce, 0f);
-                rb.AddForce(transform.up * jumpForce,ForceMode.VelocityChange);
-                jumpCounter--;
+                if (rb.velocity.y > 0)
+                {
+                    anim.SetBool("isJumping", true);
+                    // rb.velocity += new Vector3(0f, jumpForce, 0f);
+                    rb.AddForce(transform.up * jumpForce/2,ForceMode.VelocityChange);
+                    jumpCounter--;
+                }
+                else
+                {
+                    anim.SetBool("isJumping", true);
+                    // rb.velocity += new Vector3(0f, jumpForce, 0f);
+                    rb.AddForce(transform.up * jumpForce,ForceMode.VelocityChange);
+                    jumpCounter--;
+                }
             }
         }
+
+        if (IsGround())
+        {
+            anim.SetBool("isJumping", false);
+            anim.SetBool("isIdle", true);
+        }
+        
     }
 
-    public void finishJump()
-    {
-        Debug.Log("yes");
-        anim.SetBool("isJumping", false);
-        anim.SetBool("isIdle", true);
-    }
-    
-    
+
 }
