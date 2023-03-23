@@ -1953,9 +1953,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5449073075749572239}
-  - component: {fileID: 5449073075749572238}
+  - component: {fileID: 2191479179668860615}
   m_Layer: 5
-  m_Name: Popup_Settings
+  m_Name: SettingUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1982,7 +1982,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &5449073075749572238
+--- !u!114 &2191479179668860615
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1991,11 +1991,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 5449073075749572236}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a00128818eda43dfaa959b83527b255, type: 3}
+  m_Script: {fileID: 11500000, guid: 31260274f043fc041a3565ce1398eb5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  otherPanels:
-  - {fileID: 0}
 --- !u!1 &5449073075763355226
 GameObject:
   m_ObjectHideFlags: 0
