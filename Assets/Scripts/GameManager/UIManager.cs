@@ -95,23 +95,4 @@ public class UIManager :SingletonMono<UIManager>
    		}
    	}
     
-    // /// <summary>
-    // /// 关闭（返回上一个）窗体
-    // /// </summary>
-    // public void CloseUI(BaseUI baseUI)
-    // { //指定窗体隐藏,且移动到列表前端
-	   //  if (uiList.Count > 1)
-	   //  {
-		  //   BaseUI bUI = uiList[uiList.Count - 1];
-		  //   bUI.Hide();
-		  //   uiList.RemoveAt(uiList.Count - 1);
-		  //   uiList.Insert(0, baseUI);
-		  //   //显示上一个窗体
-		  //   if (uiList.Count > 1)
-		  //   {
-			 //    BaseUI displayUI = uiList[uiList.Count - 1];
-			 //    displayUI.Show();
-		  //   }
-	   //  }
-    // }
 }

@@ -8,8 +8,11 @@ public abstract class BaseUI : MonoBehaviour
     
     public virtual void Hide() => gameObject.SetActive(false);
 
-    public virtual void Show() => gameObject.SetActive(true);
-    
+    public virtual void Show()
+    {
+        gameObject.SetActive(true);
+    }
+
     public virtual void DestroyUI() => Destroy(gameObject);
     
     #region 封装常用方法
@@ -163,7 +166,7 @@ public abstract class BaseUI : MonoBehaviour
     // {
     //     UIManager.Instance.CloseUI(this);
     // }
-    
+
     #endregion
     
 }
