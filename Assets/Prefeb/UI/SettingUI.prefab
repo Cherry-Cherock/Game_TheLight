@@ -2275,7 +2275,7 @@ GameObject:
   - component: {fileID: 2948035129481779650}
   - component: {fileID: 2285787994476428572}
   m_Layer: 5
-  m_Name: Text_Support
+  m_Name: Text_KeyBind
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6781,7 +6781,7 @@ GameObject:
   - component: {fileID: 3703916158394290082}
   - component: {fileID: 2003621906935266402}
   m_Layer: 5
-  m_Name: Button_Support (1)
+  m_Name: Button_KeyBind
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -12,6 +12,17 @@ public class CameraController : MonoBehaviour
     private float minmum = 30;
     private float view_value=20f;
     private Vector3 offset;
+    private PlayerControl inputSystem;
+    
+    private void Awake()
+    {
+        inputSystem = new PlayerControl();
+    }
+
+    private void OnEnable()
+    {
+        inputSystem.Enable();
+    }
 
     void Start()
     {

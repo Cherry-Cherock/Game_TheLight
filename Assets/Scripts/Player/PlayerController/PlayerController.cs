@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
@@ -14,13 +15,13 @@ public class PlayerController : MonoBehaviour
     public Rigidbody rb;
     private float idleX, idleY;
     private Vector2 _moveInput;
-    private int jumpCounter;
+    public int jumpCounter;
     private bool jump;
     public LayerMask whatIsGround;
 
     private void Awake()
     {
-        inputSystem = new PlayerControl();
+        inputSystem = InputManager.inputActions;
     }
 
     private void OnEnable()
@@ -35,6 +36,12 @@ public class PlayerController : MonoBehaviour
         {
             anim.SetBool("isJumping", false);
             anim.SetBool("isIdle", true);
+            jumpCounter = jumpTime;
+        }
+        else
+        {
+            anim.SetBool("isJumping", true);
+            anim.SetBool("isIdle", false);
         }
         BasicMovement();
     }
@@ -44,7 +51,7 @@ public class PlayerController : MonoBehaviour
         inputSystem.Enable();
         jumpCounter = jumpTime;
         jump = false;
-        inputSystem.Player.Jump.performed += Jump;
+        inputSystem.Player.Jump.started += Jump;
     }
 
     #region Run
@@ -74,24 +81,51 @@ public class PlayerController : MonoBehaviour
     }
 
     #region Jump
-    public void Jump(InputAction.CallbackContext ctx)
+    // public void Jump(InputAction.CallbackContext ctx)
+    // {
+    //     Debug.Log("jump");
+    //     anim.SetBool("isIdle", false);
+    //     if (IsGround())
+    //     {
+    //         anim.SetBool("isJumping", true);
+    //         rb.velocity += new Vector3(0f, jumpForce, 0f);
+    //         jumpCounter = jumpTime;
+    //     }
+    //     else if (jumpCounter > 0) //double jump
+    //     {
+    //         //reset velocity 
+    //         rb.velocity = Vector3.zero;
+    //         //
+    //         anim.SetBool("isJumping", true);
+    //         rb.velocity += new Vector3(0f, jumpForce, 0f);
+    //         jumpCounter--;
+    //     }
+    // }
+    
+    public void Jump(InputAction.CallbackContext context)
     {
-        anim.SetBool("isIdle", false);
-        if (IsGround())
+        if (!context.started) return;
+        if (!IsGround() && jumpCounter<=0) return;
+        if (jumpCounter == 0) StartCoroutine(WaitForLanding());
+        
+        jumpCounter--;
+        if (rb.velocity.y <= 0)
         {
-            anim.SetBool("isJumping", true);
-            rb.velocity += new Vector3(0f, jumpForce, 0f);
-            jumpCounter = jumpTime;
+            rb.velocity += new Vector3(0f, jumpForce+System.Math.Abs(rb.velocity.y), 0f);
         }
-        else if (jumpCounter > 0) //double jump
+        else
         {
-            //reset velocity 
-            rb.velocity = Vector3.zero;
-            //
-            anim.SetBool("isJumping", true);
-            rb.velocity += new Vector3(0f, jumpForce, 0f);
-            jumpCounter--;
+            rb.velocity += new Vector3(0f, jumpForce-rb.velocity.y, 0f);
         }
+        
+        Debug.Log("tiao");
+    }
+
+    private IEnumerator WaitForLanding()
+    {
+        yield return new WaitUntil(() => !IsGround());
+        yield return new WaitUntil(IsGround);
+        
     }
     #endregion
 

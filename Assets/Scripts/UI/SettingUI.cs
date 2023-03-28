@@ -37,6 +37,12 @@ public class SettingUI : BaseUI
         togR2 = UnityHelper.GetTheChildNodeComponetScripts<Toggle>(gameObject, "Toggle2");
         togR2.onValueChanged.AddListener((b) => { if (b) resolutionIndex = 2; TogggleControl(togR2); });
         
+        //案件绑定按钮
+        AddPointerClickEvent("Button_KeyBind", go =>
+        {
+            UIManager.Show<KeyBindUI>(); 
+        });
+        //关闭按钮
         AddPointerClickEvent("Button_Close", go =>
         {
             Confirm();
