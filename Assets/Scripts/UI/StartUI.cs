@@ -13,9 +13,13 @@ public class StartUI : BaseUI
             UIManager.Show<SettingUI>();
         });
         
+        AddPointerClickEvent("ButtonStart", go =>
+        {
+            
+        });
+        
         AddPointerClickEvent("Button_Quit", go =>
         {
-           
             Application.Quit();
         });
     }

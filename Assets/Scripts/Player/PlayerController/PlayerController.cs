@@ -109,14 +109,8 @@ public class PlayerController : MonoBehaviour
         if (jumpCounter == 0) StartCoroutine(WaitForLanding());
         
         jumpCounter--;
-        if (rb.velocity.y <= 0)
-        {
-            rb.velocity += new Vector3(0f, jumpForce+System.Math.Abs(rb.velocity.y), 0f);
-        }
-        else
-        {
-            rb.velocity += new Vector3(0f, jumpForce-rb.velocity.y, 0f);
-        }
+    
+        rb.velocity += new Vector3(0f, rb.velocity.y <= 0 ? jumpForce+Math.Abs(rb.velocity.y):jumpForce-rb.velocity.y, 0f);
         
         Debug.Log("tiao");
     }

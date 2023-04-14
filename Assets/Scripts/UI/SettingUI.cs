@@ -27,7 +27,7 @@ public class SettingUI : BaseUI
         
         togHard = UnityHelper.GetTheChildNodeComponetScripts<Toggle>(gameObject, "ToggleHard");
         togHard.onValueChanged.AddListener((b) => { if (b) difficultyIndex = 2; TogggleControl(togHard); });
-        //-------------------------------------分辨率----------------------------------------------
+        //-------------------------------------Resolution----------------------------------------------
         togR0 = UnityHelper.GetTheChildNodeComponetScripts<Toggle>(gameObject, "Toggle0");
         togR0.onValueChanged.AddListener((b) => { if (b) resolutionIndex = 0; TogggleControl(togR0); });
         

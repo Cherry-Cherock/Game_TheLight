@@ -18,7 +18,7 @@ public class GameSetting : MonoBehaviour
         DifficultyIndex = PlayerPrefs.GetInt(PlayerPrefsID.DifficultyIndex, defaultDifficultyIndex);
         LanguageCN = PlayerPrefs.HasKey(PlayerPrefsID.languageCN) ? PlayerPrefs.GetInt(PlayerPrefsID.languageCN) == 1 : defaultLanguageCN;
         //log
-        Debug.Log("------初始化设置------"+"\n"+
+        Debug.Log("------Init------"+"\n"+
                   "FullScreen: "+FullScreen+"\n"+
                   "ResolutionIndex: "+ResolutionIndex+"\n"+
                   "DifficityIndex: "+DifficultyIndex+"\n"+
@@ -32,15 +32,8 @@ public class GameSetting : MonoBehaviour
         PlayerPrefs.SetInt(PlayerPrefsID.DifficultyIndex, DifficultyIndex);
         PlayerPrefs.SetInt(PlayerPrefsID.languageCN, LanguageCN ? 1 : 0);
         
-        // if (FullScreen)
-        // {
-        //     Screen.SetResolution((int)Resolutions[0].x, (int)Resolutions[0].y, true);
-        // }
-        // else
         
             Screen.SetResolution((int)Resolutions[ResolutionIndex].x, (int)Resolutions[ResolutionIndex].y, false);
-            Debug.Log("zzzzz: "+(int)Resolutions[ResolutionIndex].x+", "+(int)Resolutions[ResolutionIndex].y);
-        
     }
     
     

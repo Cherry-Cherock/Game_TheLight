@@ -64,8 +64,7 @@ public class KeyBindUI : BaseUI
         //关闭按钮
         AddPointerClickEvent("Button_Close", go =>
         {
-            Debug.Log(UpKey1.text);
-            
+            UIManager.ShowLast();
         });
     }
     

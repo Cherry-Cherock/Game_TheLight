@@ -30,16 +30,16 @@ public class UnityHelper : MonoBehaviour
         /// <param name="goParent">父对象</param>
         /// <param name="chiildName">查找的子对象名称</param>
         /// <returns></returns>
-	    public static Transform FindTheChildNode(GameObject goParent,string chiildName)
+	    public static Transform FindTheChildNode(GameObject goParent,string childName)
         {
             Transform searchTrans = null;                   //查找结果
 
-            searchTrans=goParent.transform.Find(chiildName);
+            searchTrans=goParent.transform.Find(childName);
             if (searchTrans==null)
             {
                 foreach (Transform trans in goParent.transform)
                 {
-                    searchTrans=FindTheChildNode(trans.gameObject, chiildName);
+                    searchTrans=FindTheChildNode(trans.gameObject, childName);
                     if (searchTrans!=null)
                     {
                         return searchTrans;
