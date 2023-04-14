@@ -1,0 +1,34 @@
+{
+	"1":{
+		"heroId":1,
+		"name":"英雄法师",
+		"rare":11,
+		"type":1,
+		"defaultStar":1,
+		"isOpen":true
+	},
+	"2":{
+		"heroId":2,
+		"name":"英雄战士",
+		"rare":11,
+		"type":2,
+		"defaultStar":1,
+		"isOpen":true
+	},
+	"3":{
+		"heroId":3,
+		"name":"英雄牧师",
+		"rare":11,
+		"type":3,
+		"defaultStar":1,
+		"isOpen":false
+	},
+	"4":{
+		"heroId":4,
+		"name":"英雄勇士",
+		"rare":11,
+		"type":4,
+		"defaultStar":1,
+		"isOpen":false
+	}
+}
