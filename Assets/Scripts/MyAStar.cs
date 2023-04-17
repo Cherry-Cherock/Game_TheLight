@@ -58,7 +58,7 @@ public class MyAStar : MonoBehaviour
 	void Init ()
 	{
 		//计算行列数
-		int x = (int)(plane.localScale.x * 20);
+		int x = (int)(plane.localScale.x * 15);
 		int y = (int)(plane.localScale.z * 20);
 		row = x;
 		colomn = y;
@@ -72,7 +72,7 @@ public class MyAStar : MonoBehaviour
 			for (int j = 0; j < y; j++) {
 				grids [i, j] = new Grid (i, j);
 				GameObject item = (GameObject)Instantiate (reference, 
-					                  new Vector3 (i * 0.5f, 0, j * 0.5f) + startPos, 
+					                  new Vector3 (i * 0.75f, 1, j * 0.75f) + startPos, 
 					                  Quaternion.identity);
 				item.transform.GetChild (0).GetComponent<Reference> ().x = i;
 				item.transform.GetChild (0).GetComponent<Reference> ().y = j;
