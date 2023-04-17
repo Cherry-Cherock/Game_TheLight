@@ -1,0 +1,7 @@
+{
+	"1":{
+		"MoveSpeed":4,
+		"JumpForce":13,
+		"JumpTime":1
+	}
+}

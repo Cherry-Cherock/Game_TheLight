@@ -19,8 +19,8 @@ public class GameStart : SingletonMono<GameStart>
         //------初始化鼠标------
         MouseManager.Instance.Init();
         
-        // Debug.Log("------初始化配置------");
-        // ConfigMgr.LoadConfig();
+        Debug.Log("------初始化配置------");
+        ConfigManager.LoadConfig();
         
         //------初始化声音------
         AudioMgr.Instance.Init();

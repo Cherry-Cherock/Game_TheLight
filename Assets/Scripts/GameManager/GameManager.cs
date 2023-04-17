@@ -25,9 +25,9 @@ public class GameManager : SingletonMono<GameManager>
     }
     
     #region GAME MANAGER VARIABLES
-    public  EventGameState                 OnGameStateChanged;
+    public  EventGameState              OnGameStateChanged;
     private List<AsyncOperation>        loadOperations;
-    public  GameState                   currentGameState = GameState.PREGAME;
+    public static  GameState                   currentGameState = GameState.PREGAME;
     private GameLevel                   currentLevelName = GameLevel.TEST;
     #endregion
 
@@ -93,14 +93,23 @@ public class GameManager : SingletonMono<GameManager>
         OnGameStateChanged.Invoke(currentGameState, previousGameState);
     }
     
-    public void TogglePause() =>
-        UpdateState(currentGameState == GameState.RUNNING ? GameState.PAUSED : GameState.RUNNING);
+    public void TogglePause(){
+         UpdateState(currentGameState == GameState.RUNNING ? GameState.PAUSED : GameState.RUNNING);
+         Debug.Log(currentGameState);
+    }
+       
     public void ToggleInventory() =>
         UpdateState(currentGameState == GameState.RUNNING ? GameState.INVENTORY : GameState.RUNNING);
     public void ToggleMap() =>
         UpdateState(currentGameState == GameState.RUNNING ? GameState.MAP : GameState.RUNNING);
     public void ToggleTutorial() =>
         UpdateState(currentGameState == GameState.RUNNING ? GameState.TUTORIAL : GameState.RUNNING);
+
+    public static void HandleGameStart()
+    {
+        currentGameState = GameState.RUNNING;
+        
+    }
     void HandleGameOver()
     {
         StartCoroutine(WaitForIt());

@@ -22,6 +22,12 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         inputSystem = InputManager.inputActions;
+        // foreach (var p in ConfigManager.PlayerConfigList)
+        // {
+        //     moveSpeed = p.Value.MoveSpeed;
+        //     jumpForce = p.Value.JumpForce;
+        //     jumpTime = p.Value.JumpTime;
+        // }
     }
 
     private void OnEnable()
@@ -81,27 +87,6 @@ public class PlayerController : MonoBehaviour
     }
 
     #region Jump
-    // public void Jump(InputAction.CallbackContext ctx)
-    // {
-    //     Debug.Log("jump");
-    //     anim.SetBool("isIdle", false);
-    //     if (IsGround())
-    //     {
-    //         anim.SetBool("isJumping", true);
-    //         rb.velocity += new Vector3(0f, jumpForce, 0f);
-    //         jumpCounter = jumpTime;
-    //     }
-    //     else if (jumpCounter > 0) //double jump
-    //     {
-    //         //reset velocity 
-    //         rb.velocity = Vector3.zero;
-    //         //
-    //         anim.SetBool("isJumping", true);
-    //         rb.velocity += new Vector3(0f, jumpForce, 0f);
-    //         jumpCounter--;
-    //     }
-    // }
-    
     public void Jump(InputAction.CallbackContext context)
     {
         if (!context.started) return;
