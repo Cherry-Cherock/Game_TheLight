@@ -48,8 +48,8 @@ public class MyAStar : MonoBehaviour
 	{
 		inputSystem.Enable();
 		inputSystem.Player.Map.started += ShowMap;
-		inputSystem.Map.SetTarget.started += SetTarget;
-		// Reference.startPath += StartFindingPath;
+		// inputSystem.Map.SetTarget.started += SetTarget;
+		Reference.startPath += StartFindingPath;
 	}
 	
 	//初始化值

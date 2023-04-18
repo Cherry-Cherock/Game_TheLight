@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 235094808226873878}
-  m_Layer: 10
+  m_Layer: 2
   m_Name: AStarTile
   m_TagString: MapItem
   m_Icon: {fileID: 0}
