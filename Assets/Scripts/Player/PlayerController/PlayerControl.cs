@@ -53,6 +53,15 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Map"",
+                    ""type"": ""Button"",
+                    ""id"": ""50047af7-de3a-48ec-be70-3bd7f4df0ef2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -132,6 +141,17 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a623ff3e-5722-4882-8d21-090454f80993"",
+                    ""path"": ""<Keyboard>/m"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Map"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -162,6 +182,34 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Map"",
+            ""id"": ""a7f3bb66-984d-4989-9236-a44aaecd09bc"",
+            ""actions"": [
+                {
+                    ""name"": ""SetTarget"",
+                    ""type"": ""Button"",
+                    ""id"": ""637053f4-8a13-4fd9-b1d4-551ad4e05823"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""8bbc191e-8d42-4478-a421-6b2d65673477"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SetTarget"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -171,9 +219,13 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Fire = m_Player.FindAction("Fire", throwIfNotFound: true);
+        m_Player_Map = m_Player.FindAction("Map", throwIfNotFound: true);
         // Camera
         m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
         m_Camera_Zoom = m_Camera.FindAction("Zoom", throwIfNotFound: true);
+        // Map
+        m_Map = asset.FindActionMap("Map", throwIfNotFound: true);
+        m_Map_SetTarget = m_Map.FindAction("SetTarget", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -236,6 +288,7 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Movement;
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Fire;
+    private readonly InputAction m_Player_Map;
     public struct PlayerActions
     {
         private @PlayerControl m_Wrapper;
@@ -243,6 +296,7 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
         public InputAction @Movement => m_Wrapper.m_Player_Movement;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @Fire => m_Wrapper.m_Player_Fire;
+        public InputAction @Map => m_Wrapper.m_Player_Map;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -261,6 +315,9 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
                 @Fire.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFire;
                 @Fire.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFire;
                 @Fire.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFire;
+                @Map.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMap;
+                @Map.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMap;
+                @Map.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMap;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -274,6 +331,9 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
                 @Fire.started += instance.OnFire;
                 @Fire.performed += instance.OnFire;
                 @Fire.canceled += instance.OnFire;
+                @Map.started += instance.OnMap;
+                @Map.performed += instance.OnMap;
+                @Map.canceled += instance.OnMap;
             }
         }
     }
@@ -311,14 +371,52 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
         }
     }
     public CameraActions @Camera => new CameraActions(this);
+
+    // Map
+    private readonly InputActionMap m_Map;
+    private IMapActions m_MapActionsCallbackInterface;
+    private readonly InputAction m_Map_SetTarget;
+    public struct MapActions
+    {
+        private @PlayerControl m_Wrapper;
+        public MapActions(@PlayerControl wrapper) { m_Wrapper = wrapper; }
+        public InputAction @SetTarget => m_Wrapper.m_Map_SetTarget;
+        public InputActionMap Get() { return m_Wrapper.m_Map; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(MapActions set) { return set.Get(); }
+        public void SetCallbacks(IMapActions instance)
+        {
+            if (m_Wrapper.m_MapActionsCallbackInterface != null)
+            {
+                @SetTarget.started -= m_Wrapper.m_MapActionsCallbackInterface.OnSetTarget;
+                @SetTarget.performed -= m_Wrapper.m_MapActionsCallbackInterface.OnSetTarget;
+                @SetTarget.canceled -= m_Wrapper.m_MapActionsCallbackInterface.OnSetTarget;
+            }
+            m_Wrapper.m_MapActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @SetTarget.started += instance.OnSetTarget;
+                @SetTarget.performed += instance.OnSetTarget;
+                @SetTarget.canceled += instance.OnSetTarget;
+            }
+        }
+    }
+    public MapActions @Map => new MapActions(this);
     public interface IPlayerActions
     {
         void OnMovement(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
+        void OnMap(InputAction.CallbackContext context);
     }
     public interface ICameraActions
     {
         void OnZoom(InputAction.CallbackContext context);
+    }
+    public interface IMapActions
+    {
+        void OnSetTarget(InputAction.CallbackContext context);
     }
 }

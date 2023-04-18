@@ -1,9 +1,12 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.InputSystem;
 
 public class MyAStar : MonoBehaviour
 {
+	private PlayerControl inputSystem;
 	/// <summary>
 	/// 单例脚本
 	/// </summary>
@@ -36,11 +39,21 @@ public class MyAStar : MonoBehaviour
 	private Transform start;
 	private Transform end;
 	private Transform obstacle;
-	//流颜色参数
-	private float alpha = 0;
-	private float incrementPer = 0;
-
 	void Awake ()
+	{
+		inputSystem = InputManager.inputActions;
+	}
+
+	private void OnEnable()
+	{
+		inputSystem.Enable();
+		inputSystem.Player.Map.started += ShowMap;
+		inputSystem.Map.SetTarget.started += SetTarget;
+		// Reference.startPath += StartFindingPath;
+	}
+	
+	//初始化值
+	public void initPoints()
 	{
 		instance = this;
 		plane = GameObject.Find ("Ground").transform;
@@ -51,11 +64,9 @@ public class MyAStar : MonoBehaviour
 		openList = new ArrayList ();
 		closeList = new ArrayList ();
 	}
-
-	/// <summary>
-	/// 初始化操作
-	/// </summary>
-	void Init ()
+	
+	//初始化地图
+	public void InitMap()
 	{
 		//计算行列数
 		int x = (int)(plane.localScale.x * 15);
@@ -72,14 +83,41 @@ public class MyAStar : MonoBehaviour
 			for (int j = 0; j < y; j++) {
 				grids [i, j] = new Grid (i, j);
 				GameObject item = (GameObject)Instantiate (reference, 
-					                  new Vector3 (i * 0.75f, 1, j * 0.75f) + startPos, 
-					                  Quaternion.identity);
+					new Vector3 (i * 0.75f, 1, j * 0.75f) + startPos, 
+					Quaternion.identity);
 				item.transform.GetChild (0).GetComponent<Reference> ().x = i;
 				item.transform.GetChild (0).GetComponent<Reference> ().y = j;
 				objs [i, j] = item;
 			}
 		}
 	}
+
+	public void ShowMap(InputAction.CallbackContext context)
+	{
+		initPoints();
+		InitMap();
+	}
+	
+	void SetTarget(InputAction.CallbackContext context)
+	{
+		Debug.Log("mouseX: "+(int)Input.mousePosition.x+"     "+"mouseY: "+(int)Input.mousePosition.y);
+		// instance.grids [(int)Input.mousePosition.x, (int)Input.mousePosition.y].type = GridType.End;
+		// instance.targetX = (int)Input.mousePosition.x;
+		// instance.targetY = (int)Input.mousePosition.y;
+		// StartFindingPath();
+	}
+	public void StartFindingPath()
+	{
+		initPoints();
+		if (targetX != 0 || targetY != 0)
+		{
+			StartCoroutine (Count ());
+			StartCoroutine (ShowResult ());
+		}
+	}
+
+	
+	
 
 	/// <summary>
 	/// A*计算
@@ -173,8 +211,6 @@ public class MyAStar : MonoBehaviour
 	{
 		//等待前面计算完成
 		yield return new WaitForSeconds (0.3f);
-		//计算每帧颜色值增量
-		incrementPer = 1 / (float)parentList.Count;
 		//展示结果
 		while (parentList.Count != 0) {
 			//出栈
@@ -185,12 +221,12 @@ public class MyAStar : MonoBehaviour
 			string[] xy = str.Split (new char[]{ '|' });
 			int x = int.Parse (xy [0]);
 			int y = int.Parse (xy [1]);
-			//当前颜色值
-			alpha += incrementPer;
 			//以颜色方式绘制路径
 			objs [x, y].transform.GetChild (0).GetComponent<MeshRenderer> ().material.color
-			= new Color (1 - alpha, alpha, 0, 1);
+			= new Color (0, 0, 0, 1);
 		}
+		
+		// Reference.startPath -= StartFindingPath;
 	}
 
 	/// <summary>
@@ -202,11 +238,5 @@ public class MyAStar : MonoBehaviour
 	{
 		return (int)(Mathf.Abs (targetX - x) + Mathf.Abs (targetY - y)) * 10;
 	}
-
-	void Start ()
-	{
-		Init ();
-		StartCoroutine (Count ());
-		StartCoroutine (ShowResult ());
-	}
+	
 }

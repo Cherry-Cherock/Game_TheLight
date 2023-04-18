@@ -1,5 +1,7 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class Reference : MonoBehaviour
@@ -13,8 +15,11 @@ public class Reference : MonoBehaviour
 	public int x;
 	public int y;
 
+public delegate void CallNumber();
 
-	//判断当前格子的类型
+public static event CallNumber startPath;
+
+//判断当前格子的类型
 	void OnTriggerEnter (Collider other)
 	{
 		if (other.name == "Start") {
@@ -25,12 +30,15 @@ public class Reference : MonoBehaviour
 			MyAStar.instance.startY = y;
 		} else if (other.name == "End") {
 			GetComponent<MeshRenderer> ().material = endMat;
+			Debug.Log("X: "+x+"     "+"Y: "+y);
 			MyAStar.instance.grids [x, y].type = GridType.End;
 			MyAStar.instance.targetX = x;
 			MyAStar.instance.targetY = y;
+			startPath?.Invoke();
 		} else if (other.name == "Obs") {
 			GetComponent<MeshRenderer> ().material = obstacleMat;
 			MyAStar.instance.grids [x, y].type = GridType.Obstacle;
 		}
 	}
+
 }
