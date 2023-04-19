@@ -188,15 +188,6 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
             ""id"": ""a7f3bb66-984d-4989-9236-a44aaecd09bc"",
             ""actions"": [
                 {
-                    ""name"": ""MapSetTarget"",
-                    ""type"": ""Button"",
-                    ""id"": ""3109db55-1adf-49a3-8d66-03b22380fbed"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""PausedGame"",
                     ""type"": ""Button"",
                     ""id"": ""76fc4b63-164a-4451-b475-eaaf1376f958"",
@@ -213,20 +204,18 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MapSetTarget"",
+                    ""type"": ""Button"",
+                    ""id"": ""5066bcf7-2439-43c9-923b-90786238ad82"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""89cb9633-f956-43a2-86e7-d217b4011b1a"",
-                    ""path"": ""<Mouse>/rightButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""MapSetTarget"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
                 {
                     ""name"": """",
                     ""id"": ""265bfa74-c1f9-4290-a2ff-d9289c3ded50"",
@@ -248,6 +237,17 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
                     ""action"": ""Map"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5191670d-9cd2-499c-8f7c-f9e81cd0aab7"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MapSetTarget"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -265,9 +265,9 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
         m_Camera_Zoom = m_Camera.FindAction("Zoom", throwIfNotFound: true);
         // Game
         m_Game = asset.FindActionMap("Game", throwIfNotFound: true);
-        m_Game_MapSetTarget = m_Game.FindAction("MapSetTarget", throwIfNotFound: true);
         m_Game_PausedGame = m_Game.FindAction("PausedGame", throwIfNotFound: true);
         m_Game_Map = m_Game.FindAction("Map", throwIfNotFound: true);
+        m_Game_MapSetTarget = m_Game.FindAction("MapSetTarget", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -417,16 +417,16 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
     // Game
     private readonly InputActionMap m_Game;
     private IGameActions m_GameActionsCallbackInterface;
-    private readonly InputAction m_Game_MapSetTarget;
     private readonly InputAction m_Game_PausedGame;
     private readonly InputAction m_Game_Map;
+    private readonly InputAction m_Game_MapSetTarget;
     public struct GameActions
     {
         private @PlayerControl m_Wrapper;
         public GameActions(@PlayerControl wrapper) { m_Wrapper = wrapper; }
-        public InputAction @MapSetTarget => m_Wrapper.m_Game_MapSetTarget;
         public InputAction @PausedGame => m_Wrapper.m_Game_PausedGame;
         public InputAction @Map => m_Wrapper.m_Game_Map;
+        public InputAction @MapSetTarget => m_Wrapper.m_Game_MapSetTarget;
         public InputActionMap Get() { return m_Wrapper.m_Game; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -436,28 +436,28 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
         {
             if (m_Wrapper.m_GameActionsCallbackInterface != null)
             {
-                @MapSetTarget.started -= m_Wrapper.m_GameActionsCallbackInterface.OnMapSetTarget;
-                @MapSetTarget.performed -= m_Wrapper.m_GameActionsCallbackInterface.OnMapSetTarget;
-                @MapSetTarget.canceled -= m_Wrapper.m_GameActionsCallbackInterface.OnMapSetTarget;
                 @PausedGame.started -= m_Wrapper.m_GameActionsCallbackInterface.OnPausedGame;
                 @PausedGame.performed -= m_Wrapper.m_GameActionsCallbackInterface.OnPausedGame;
                 @PausedGame.canceled -= m_Wrapper.m_GameActionsCallbackInterface.OnPausedGame;
                 @Map.started -= m_Wrapper.m_GameActionsCallbackInterface.OnMap;
                 @Map.performed -= m_Wrapper.m_GameActionsCallbackInterface.OnMap;
                 @Map.canceled -= m_Wrapper.m_GameActionsCallbackInterface.OnMap;
+                @MapSetTarget.started -= m_Wrapper.m_GameActionsCallbackInterface.OnMapSetTarget;
+                @MapSetTarget.performed -= m_Wrapper.m_GameActionsCallbackInterface.OnMapSetTarget;
+                @MapSetTarget.canceled -= m_Wrapper.m_GameActionsCallbackInterface.OnMapSetTarget;
             }
             m_Wrapper.m_GameActionsCallbackInterface = instance;
             if (instance != null)
             {
-                @MapSetTarget.started += instance.OnMapSetTarget;
-                @MapSetTarget.performed += instance.OnMapSetTarget;
-                @MapSetTarget.canceled += instance.OnMapSetTarget;
                 @PausedGame.started += instance.OnPausedGame;
                 @PausedGame.performed += instance.OnPausedGame;
                 @PausedGame.canceled += instance.OnPausedGame;
                 @Map.started += instance.OnMap;
                 @Map.performed += instance.OnMap;
                 @Map.canceled += instance.OnMap;
+                @MapSetTarget.started += instance.OnMapSetTarget;
+                @MapSetTarget.performed += instance.OnMapSetTarget;
+                @MapSetTarget.canceled += instance.OnMapSetTarget;
             }
         }
     }
@@ -475,8 +475,8 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
     }
     public interface IGameActions
     {
-        void OnMapSetTarget(InputAction.CallbackContext context);
         void OnPausedGame(InputAction.CallbackContext context);
         void OnMap(InputAction.CallbackContext context);
+        void OnMapSetTarget(InputAction.CallbackContext context);
     }
 }

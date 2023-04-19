@@ -6,7 +6,15 @@ using UnityEngine.InputSystem;
 
 public class MyAStar : MonoBehaviour
 {
+	//显示地图 按键监听
 	private PlayerControl inputSystem;
+	public delegate void MClick(); 
+	public static event MClick startPoint;
+	//切换相机
+	public Camera mainCamera;
+	public Camera pathFindCamera;
+	public Camera uiCamera;
+	
 	/// <summary>
 	/// 单例脚本
 	/// </summary>
@@ -105,7 +113,12 @@ public class MyAStar : MonoBehaviour
 
 	public void ShowMap(InputAction.CallbackContext context)
 	{
+		startPoint.Invoke();
 		// gm.ToggleMap();
+		pathFindCamera.enabled = true;
+		uiCamera.enabled = !pathFindCamera.enabled;
+		mainCamera.enabled = !pathFindCamera.enabled;
+		
 		initPoints();
 		InitMap();
 		mapLight.enabled = true;
@@ -216,7 +229,6 @@ public class MyAStar : MonoBehaviour
 	{
 		//等待前面计算完成
 		yield return new WaitForSeconds (0.2f);
-		Debug.Log("His: "+historyList.Count);
 		//展示结果
 		while (parentList.Count != 0)
 		{
@@ -236,11 +248,8 @@ public class MyAStar : MonoBehaviour
 	
 	public void CleanResult ()
 	{
-		Debug.Log("删除前： "+historyList.Count);
-		
 		//清除结果
 		while (historyList.Count != 0) {
-			Debug.Log("开始删除");
 			//出栈
 			string str = historyList.Pop();
 			//拆分获取坐标

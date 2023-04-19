@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     public Animator anim;
     //------------------------------------
     private PlayerControl inputSystem;
+    private BoxCollider MapPlayerStartPoint;
     public Rigidbody rb;
     private float idleX, idleY;
     private Vector2 _moveInput;
@@ -22,6 +23,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         inputSystem = InputManager.inputActions;
+        MapPlayerStartPoint = UnityHelper.GetTheChildNodeComponetScripts<BoxCollider>(gameObject, "Start");
         // foreach (var p in ConfigManager.PlayerConfigList)
         // {
         //     moveSpeed = p.Value.MoveSpeed;
@@ -33,6 +35,7 @@ public class PlayerController : MonoBehaviour
     private void OnEnable()
     {
         init();
+        MyAStar.startPoint += OpenMapStartPoint;
     }
 
 
@@ -108,6 +111,10 @@ public class PlayerController : MonoBehaviour
     }
     #endregion
 
+    public void OpenMapStartPoint()
+    {
+        MapPlayerStartPoint.enabled =true;
+    }
 
     // private void OnDisable()
     // {

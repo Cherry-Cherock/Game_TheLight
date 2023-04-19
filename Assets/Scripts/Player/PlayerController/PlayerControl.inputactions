@@ -166,15 +166,6 @@
             "id": "a7f3bb66-984d-4989-9236-a44aaecd09bc",
             "actions": [
                 {
-                    "name": "MapSetTarget",
-                    "type": "Button",
-                    "id": "3109db55-1adf-49a3-8d66-03b22380fbed",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "PausedGame",
                     "type": "Button",
                     "id": "76fc4b63-164a-4451-b475-eaaf1376f958",
@@ -191,20 +182,18 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "MapSetTarget",
+                    "type": "Button",
+                    "id": "5066bcf7-2439-43c9-923b-90786238ad82",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
-                {
-                    "name": "",
-                    "id": "89cb9633-f956-43a2-86e7-d217b4011b1a",
-                    "path": "<Mouse>/rightButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "MapSetTarget",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
                 {
                     "name": "",
                     "id": "265bfa74-c1f9-4290-a2ff-d9289c3ded50",
@@ -224,6 +213,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Map",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5191670d-9cd2-499c-8f7c-f9e81cd0aab7",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MapSetTarget",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

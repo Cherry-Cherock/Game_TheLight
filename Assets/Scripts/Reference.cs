@@ -46,7 +46,7 @@ public class Reference : MonoBehaviour
 			if (_hit.transform == transform)
 			{
 				GetComponent<MeshRenderer> ().material = endMat;
-				Debug.Log("X: "+x+"     "+"Y: "+y);
+				Debug.Log("设置目标点: "+"("+x+", "+y+")"+"  使用的相机: "+camera.name);
 				MyAStar.instance.grids [x, y].type = GridType.End;
 				MyAStar.instance.targetX = x;
 				MyAStar.instance.targetY = y;
