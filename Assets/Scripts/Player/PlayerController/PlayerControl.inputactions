@@ -33,9 +33,9 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Map",
+                    "name": "FindPath",
                     "type": "Button",
-                    "id": "50047af7-de3a-48ec-be70-3bd7f4df0ef2",
+                    "id": "1f8da190-d89f-42f4-bba0-e05ec94415bd",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -122,12 +122,12 @@
                 },
                 {
                     "name": "",
-                    "id": "a623ff3e-5722-4882-8d21-090454f80993",
-                    "path": "<Keyboard>/m",
+                    "id": "60c1017c-29c5-4c8f-8ebf-1e504b417436",
+                    "path": "<Mouse>/rightButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Map",
+                    "action": "FindPath",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -162,13 +162,31 @@
             ]
         },
         {
-            "name": "Map",
+            "name": "Game",
             "id": "a7f3bb66-984d-4989-9236-a44aaecd09bc",
             "actions": [
                 {
-                    "name": "SetTarget",
+                    "name": "MapSetTarget",
                     "type": "Button",
-                    "id": "637053f4-8a13-4fd9-b1d4-551ad4e05823",
+                    "id": "3109db55-1adf-49a3-8d66-03b22380fbed",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "PausedGame",
+                    "type": "Button",
+                    "id": "76fc4b63-164a-4451-b475-eaaf1376f958",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Map",
+                    "type": "Button",
+                    "id": "02ed59a6-e5b6-46bc-8832-a178f1c016d0",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -178,12 +196,34 @@
             "bindings": [
                 {
                     "name": "",
-                    "id": "8bbc191e-8d42-4478-a421-6b2d65673477",
+                    "id": "89cb9633-f956-43a2-86e7-d217b4011b1a",
                     "path": "<Mouse>/rightButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "SetTarget",
+                    "action": "MapSetTarget",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "265bfa74-c1f9-4290-a2ff-d9289c3ded50",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PausedGame",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9ff92fdd-bfe9-4091-828f-b05992fddab3",
+                    "path": "<Keyboard>/m",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Map",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

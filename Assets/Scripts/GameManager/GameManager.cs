@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class GameManager : SingletonMono<GameManager>
@@ -27,20 +28,25 @@ public class GameManager : SingletonMono<GameManager>
     #region GAME MANAGER VARIABLES
     public  EventGameState              OnGameStateChanged;
     private List<AsyncOperation>        loadOperations;
-    public static  GameState                   currentGameState = GameState.PREGAME;
+    public static  GameState            currentGameState = GameState.RUNNING;
     private GameLevel                   currentLevelName = GameLevel.TEST;
+    private PlayerControl inputSystem;
     #endregion
 
-    private void Update()
+    void Awake ()
     {
-        if (currentGameState == GameState.PREGAME)
-        {
-            return;
-        }
-        if (Input.GetKeyUp(KeyCode.Escape))
-        {
-            TogglePause();
-        }
+        inputSystem = InputManager.inputActions;
+    }
+	
+    private void OnEnable()
+    {
+        inputSystem.Enable();
+        inputSystem.Game.PausedGame.started += PauseCurrentGame;
+    }
+
+    public void PauseCurrentGame(InputAction.CallbackContext context)
+    {
+        TogglePause();
     }
 
     public GameState CurrentGameState
@@ -98,6 +104,7 @@ public class GameManager : SingletonMono<GameManager>
          Debug.Log(currentGameState);
     }
        
+    
     public void ToggleInventory() =>
         UpdateState(currentGameState == GameState.RUNNING ? GameState.INVENTORY : GameState.RUNNING);
     public void ToggleMap() =>

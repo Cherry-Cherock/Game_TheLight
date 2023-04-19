@@ -12,6 +12,10 @@ public class MyAStar : MonoBehaviour
 	/// </summary>
 	public static MyAStar instance;
 
+	// private GameManager gm;
+	public Light normalLight;
+	public Light mapLight;
+	
 	//参考物体预设体
 	public GameObject reference;
 	//格子数组
@@ -34,6 +38,8 @@ public class MyAStar : MonoBehaviour
 	private int colomn;
 	//结果栈
 	private Stack<string> parentList;
+	//历史栈
+	private Stack<string> historyList;
 	//基础物体
 	private Transform plane;
 	private Transform start;
@@ -42,12 +48,14 @@ public class MyAStar : MonoBehaviour
 	void Awake ()
 	{
 		inputSystem = InputManager.inputActions;
+		// gm = gameObject.GetComponent<GameManager>();
+		historyList = new Stack<string> ();
 	}
 
 	private void OnEnable()
 	{
 		inputSystem.Enable();
-		inputSystem.Player.Map.started += ShowMap;
+		inputSystem.Game.Map.started += ShowMap;
 		// inputSystem.Map.SetTarget.started += SetTarget;
 		Reference.startPath += StartFindingPath;
 	}
@@ -57,12 +65,13 @@ public class MyAStar : MonoBehaviour
 	{
 		instance = this;
 		plane = GameObject.Find ("Ground").transform;
-		start = GameObject.Find ("Start").transform;
-		end = GameObject.Find ("End").transform;
-		obstacle = GameObject.Find ("Obs").transform;
+		// start = GameObject.Find ("Start").transform;
+		// end = GameObject.Find ("End").transform;
+		// obstacle = GameObject.Find ("Obs").transform;
 		parentList = new Stack<string> ();
 		openList = new ArrayList ();
 		closeList = new ArrayList ();
+		CleanResult();
 	}
 	
 	//初始化地图
@@ -92,20 +101,17 @@ public class MyAStar : MonoBehaviour
 		}
 	}
 
+
+
 	public void ShowMap(InputAction.CallbackContext context)
 	{
+		// gm.ToggleMap();
 		initPoints();
 		InitMap();
+		mapLight.enabled = true;
+		normalLight.enabled = !mapLight.enabled;
 	}
-	
-	void SetTarget(InputAction.CallbackContext context)
-	{
-		Debug.Log("mouseX: "+(int)Input.mousePosition.x+"     "+"mouseY: "+(int)Input.mousePosition.y);
-		// instance.grids [(int)Input.mousePosition.x, (int)Input.mousePosition.y].type = GridType.End;
-		// instance.targetX = (int)Input.mousePosition.x;
-		// instance.targetY = (int)Input.mousePosition.y;
-		// StartFindingPath();
-	}
+
 	public void StartFindingPath()
 	{
 		initPoints();
@@ -115,8 +121,6 @@ public class MyAStar : MonoBehaviour
 			StartCoroutine (ShowResult ());
 		}
 	}
-
-	
 	
 
 	/// <summary>
@@ -198,6 +202,7 @@ public class MyAStar : MonoBehaviour
 		if (currentGrid.parent != null) {
 			//添加到父对象栈（即结果栈）
 			parentList.Push (currentGrid.x + "|" + currentGrid.y);
+			historyList.Push(currentGrid.x + "|" + currentGrid.y);
 			//递归获取
 			GenerateResult (currentGrid.parent);
 		}
@@ -210,13 +215,15 @@ public class MyAStar : MonoBehaviour
 	IEnumerator ShowResult ()
 	{
 		//等待前面计算完成
-		yield return new WaitForSeconds (0.3f);
+		yield return new WaitForSeconds (0.2f);
+		Debug.Log("His: "+historyList.Count);
 		//展示结果
-		while (parentList.Count != 0) {
+		while (parentList.Count != 0)
+		{
 			//出栈
-			string str = parentList.Pop ();
-			//等0.3秒
-			yield return new WaitForSeconds (0.3f);
+			string str = parentList.Pop();
+			//等0.4秒
+			yield return new WaitForSeconds (0.1f);
 			//拆分获取坐标
 			string[] xy = str.Split (new char[]{ '|' });
 			int x = int.Parse (xy [0]);
@@ -225,8 +232,25 @@ public class MyAStar : MonoBehaviour
 			objs [x, y].transform.GetChild (0).GetComponent<MeshRenderer> ().material.color
 			= new Color (0, 0, 0, 1);
 		}
+	}
+	
+	public void CleanResult ()
+	{
+		Debug.Log("删除前： "+historyList.Count);
 		
-		// Reference.startPath -= StartFindingPath;
+		//清除结果
+		while (historyList.Count != 0) {
+			Debug.Log("开始删除");
+			//出栈
+			string str = historyList.Pop();
+			//拆分获取坐标
+			string[] xy = str.Split (new char[]{ '|' });
+			int x = int.Parse (xy [0]);
+			int y = int.Parse (xy [1]);
+			//以颜色方式绘制路径
+			objs [x, y].transform.GetChild (0).GetComponent<MeshRenderer> ().material.color
+				= new Color (255, 255, 255, 1);
+		}
 	}
 
 	/// <summary>

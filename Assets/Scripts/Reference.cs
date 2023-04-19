@@ -3,6 +3,7 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using System.Collections.Generic;
 using UnityEngine.UI;
 
 public class Reference : MonoBehaviour
@@ -33,9 +34,10 @@ public class Reference : MonoBehaviour
 	private void OnEnable()
 	{
 		inputSystem.Enable();
-		inputSystem.Map.SetTarget.started += SetTarget;
+		inputSystem.Game.MapSetTarget.started += SetTarget;
 	}
 
+	
 	public void SetTarget(InputAction.CallbackContext context)
 	{
 		_ray = camera.ScreenPointToRay(Input.mousePosition);

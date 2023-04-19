@@ -9,6 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 235094808226873878}
+  - component: {fileID: 1862465521603644430}
+  - component: {fileID: 3685825141220188532}
+  - component: {fileID: 1005171061021003234}
   m_Layer: 2
   m_Name: AStarTile
   m_TagString: MapItem
@@ -31,6 +34,51 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1862465521603644430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1456068892802942328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d55e854d9fdec94ab1300399055099d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnGameStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &3685825141220188532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1456068892802942328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d55e854d9fdec94ab1300399055099d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnGameStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &1005171061021003234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1456068892802942328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d55e854d9fdec94ab1300399055099d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnGameStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &789331216388257559
 PrefabInstance:
   m_ObjectHideFlags: 0
