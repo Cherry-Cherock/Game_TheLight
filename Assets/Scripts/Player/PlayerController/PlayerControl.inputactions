@@ -177,7 +177,7 @@
                 {
                     "name": "Map",
                     "type": "Button",
-                    "id": "02ed59a6-e5b6-46bc-8832-a178f1c016d0",
+                    "id": "d4dd6305-72cc-4807-a0bd-168c7c32f4dc",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -186,7 +186,7 @@
                 {
                     "name": "MapSetTarget",
                     "type": "Button",
-                    "id": "5066bcf7-2439-43c9-923b-90786238ad82",
+                    "id": "f25ce7bd-fd12-4202-bcf5-9c098e7f0e44",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -207,7 +207,7 @@
                 },
                 {
                     "name": "",
-                    "id": "9ff92fdd-bfe9-4091-828f-b05992fddab3",
+                    "id": "23c9f7a7-26b7-4afb-a46c-9e9d182d25d1",
                     "path": "<Keyboard>/m",
                     "interactions": "",
                     "processors": "",
@@ -218,7 +218,7 @@
                 },
                 {
                     "name": "",
-                    "id": "5191670d-9cd2-499c-8f7c-f9e81cd0aab7",
+                    "id": "5dbb1993-26b6-4b87-8986-116075a5990e",
                     "path": "<Mouse>/rightButton",
                     "interactions": "",
                     "processors": "",

@@ -10,6 +10,8 @@ public class MyAStar : MonoBehaviour
 	private PlayerControl inputSystem;
 	public delegate void MClick(); 
 	public static event MClick startPoint;
+
+	// public static event MClick startLoading;
 	//切换相机
 	public Camera mainCamera;
 	public Camera pathFindCamera;
@@ -113,6 +115,7 @@ public class MyAStar : MonoBehaviour
 
 	public void ShowMap(InputAction.CallbackContext context)
 	{
+		// startLoading.Invoke();
 		startPoint.Invoke();
 		// gm.ToggleMap();
 		pathFindCamera.enabled = true;
@@ -123,6 +126,7 @@ public class MyAStar : MonoBehaviour
 		InitMap();
 		mapLight.enabled = true;
 		normalLight.enabled = !mapLight.enabled;
+		// Time.timeScale = 0.0f;
 	}
 
 	public void StartFindingPath()

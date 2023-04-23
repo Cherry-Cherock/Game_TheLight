@@ -71,4 +71,10 @@ public class Reference : MonoBehaviour
 		}
 	}
 
+
+	public void Destroy()
+	{
+		
+	}
+
 }
