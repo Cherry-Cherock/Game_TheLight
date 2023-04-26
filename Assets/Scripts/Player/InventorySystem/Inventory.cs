@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 namespace Player.InventorySystem
@@ -11,10 +12,25 @@ namespace Player.InventorySystem
     {
         [SerializeField]
         private int _size = 8;
-
+        public int Size => _size;
+      
         [SerializeField] 
         private List<InventorySlot> _slots;
+        public List<InventorySlot> Slots => _slots;
 
+        private int _activeSlotIndex;
+
+        public int ActiveSlotIndex
+        {
+            get => _activeSlotIndex;
+            private set
+            {
+                _slots[_activeSlotIndex].Active = false;
+                _activeSlotIndex = value < 0 ? _size - 1 : value % Size;
+                _slots[_activeSlotIndex].Active = true;
+            }
+        }
+        
         private void OnValidate()
         {
             AdjustSize();
@@ -45,6 +61,18 @@ namespace Player.InventorySystem
                                                  !onlyStackable);
         }
 
+        public bool HasItem(ItemStack itemStack, bool checkNumberOfItem = false)
+        {
+            var itemSlot = FindSlot(itemStack.Item);
+            if (itemSlot == null) return false;
+            if (!checkNumberOfItem) return true;
+            
+            if (itemStack.Item.IsStackable)
+            {
+                return itemSlot.NumberOfItems >= itemStack.NumberOfItems;
+            }
+            return _slots.Count(slot => slot.Item == itemStack.Item) >= itemStack.NumberOfItems;
+        }
         public ItemStack AddItem(ItemStack itemStack)
         {
             var relevantSlot = FindSlot(itemStack.Item, true);
@@ -63,6 +91,49 @@ namespace Player.InventorySystem
                 relevantSlot.State = itemStack;
             }
             return relevantSlot.State;
+        }
+        
+        public ItemStack RemoveItem(int atIndex, bool spawn = false)
+        {
+            if (!_slots[atIndex].HasItem)
+                throw new InventoryException(ErrorAction.Remove, "slot is empty!");
+            if (spawn)
+            {
+                
+            }
+            ClearSlot(atIndex);
+            return new ItemStack();
+        }
+
+        public ItemStack RemoveItem(ItemStack itemStack)
+        {
+            var itemSlot = FindSlot(itemStack.Item);
+            if (itemSlot == null)
+            {
+                throw new InventoryException(ErrorAction.Remove, "No item in inventory!");
+            }
+
+            if (itemSlot.Item.IsStackable && itemSlot.NumberOfItems < itemStack.NumberOfItems)
+            {
+                throw new InventoryException(ErrorAction.Remove, "Not enough items!");
+            }
+
+            itemSlot.NumberOfItems -= itemStack.NumberOfItems;
+            if (itemSlot.Item.IsStackable && itemSlot.NumberOfItems > 0)
+            {
+                return itemSlot.State;
+            }
+            itemSlot.Clear();
+            return new ItemStack();
+        }
+
+        public void ClearSlot(int atIndex)
+        {
+            _slots[atIndex].Clear();
+        }
+        public void ActivateSlot(int atIndex)
+        {
+            ActiveSlotIndex = atIndex;
         }
     }
 }

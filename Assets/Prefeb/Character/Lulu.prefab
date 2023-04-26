@@ -359,14 +359,14 @@ MonoBehaviour:
   _size: 8
   _slots:
   - _state:
-      _item: {fileID: 0}
-      _numberOfItems: 0
+      _item: {fileID: 11400000, guid: 80d7c452a3f331a40aad523ccda989b7, type: 2}
+      _numberOfItems: 5
   - _state:
-      _item: {fileID: 0}
-      _numberOfItems: 0
+      _item: {fileID: 11400000, guid: 80d7c452a3f331a40aad523ccda989b7, type: 2}
+      _numberOfItems: 1
   - _state:
-      _item: {fileID: 0}
-      _numberOfItems: 0
+      _item: {fileID: 11400000, guid: 9155b329523312f41bbb732a6036a268, type: 2}
+      _numberOfItems: 3
   - _state:
       _item: {fileID: 0}
       _numberOfItems: 0
