@@ -30,7 +30,15 @@ namespace Player.InventorySystem
                 _slots[_activeSlotIndex].Active = true;
             }
         }
-        
+
+        private void Awake()
+        {
+            if (_size>0)
+            {
+                _slots[0].Active = true;
+            }
+        }
+
         private void OnValidate()
         {
             AdjustSize();

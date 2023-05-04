@@ -197,6 +197,7 @@ GameObject:
   - component: {fileID: 1201744772446992038}
   - component: {fileID: 1201744772446992039}
   - component: {fileID: 3441530032364464636}
+  - component: {fileID: 1085194958217519221}
   m_Layer: 0
   m_Name: Lulu
   m_TagString: Player
@@ -382,6 +383,18 @@ MonoBehaviour:
   - _state:
       _item: {fileID: 0}
       _numberOfItems: 0
+--- !u!114 &1085194958217519221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1201744772446992036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46ef3ec29e9372040a7666108844aef8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4739395529675218419
 GameObject:
   m_ObjectHideFlags: 0

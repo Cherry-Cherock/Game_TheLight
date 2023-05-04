@@ -1657,12 +1657,12 @@ PrefabInstance:
     - target: {fileID: 2023485578591291517, guid: f176b3cc80756394c91ebfd61a2797c7,
         type: 3}
       propertyPath: _stack._numberOfItems
-      value: 1
+      value: 89
       objectReference: {fileID: 0}
     - target: {fileID: 2023485578591291518, guid: f176b3cc80756394c91ebfd61a2797c7,
         type: 3}
       propertyPath: m_Name
-      value: Health Potion (1)
+      value: Health Potion (89)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f176b3cc80756394c91ebfd61a2797c7, type: 3}
