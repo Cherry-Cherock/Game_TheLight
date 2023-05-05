@@ -7,8 +7,6 @@ namespace Player.InventorySystem
     [Serializable]
     public class ItemStack
     {
-        public static readonly ItemStack Empty = new ItemStack(null, 0);
-        
         [SerializeField]
         private ItemDefinition _item;
         

@@ -105,9 +105,9 @@ namespace Player.InventorySystem
         {
             if (!_slots[atIndex].HasItem)
                 throw new InventoryException(ErrorAction.Remove, "slot is empty!");
-            if (spawn)
+            if (spawn && TryGetComponent<ItemDropManager>(out var dropManager))
             {
-                
+                dropManager.SpawnItem(_slots[atIndex].State);
             }
             ClearSlot(atIndex);
             return new ItemStack();
@@ -142,6 +142,11 @@ namespace Player.InventorySystem
         public void ActivateSlot(int atIndex)
         {
             ActiveSlotIndex = atIndex;
+        }
+
+        public InventorySlot GetActiveSlot()
+        {
+            return _slots[ActiveSlotIndex];
         }
     }
 }

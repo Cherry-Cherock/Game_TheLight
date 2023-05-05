@@ -62,6 +62,33 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""InventoryRight"",
+                    ""type"": ""Button"",
+                    ""id"": ""0d205199-02d0-4a17-b917-3b8de1d56310"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""InventoryLeft"",
+                    ""type"": ""Button"",
+                    ""id"": ""0a052d57-500e-49b8-94fe-93a286b310ac"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""dropItem"",
+                    ""type"": ""Button"",
+                    ""id"": ""950a1f99-02d6-4951-9dd7-8fba9af0d3bb"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -150,6 +177,39 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""FindPath"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bc3e22f3-8038-4370-93ba-1cceb56eeb3a"",
+                    ""path"": ""<Keyboard>/x"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""InventoryRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f8195d6e-32c6-4017-b8fa-4d1510cdf962"",
+                    ""path"": ""<Keyboard>/z"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""InventoryLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3fba4508-12da-4a0d-bce1-f828a44290d3"",
+                    ""path"": ""<Keyboard>/g"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""dropItem"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -260,6 +320,9 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Fire = m_Player.FindAction("Fire", throwIfNotFound: true);
         m_Player_FindPath = m_Player.FindAction("FindPath", throwIfNotFound: true);
+        m_Player_InventoryRight = m_Player.FindAction("InventoryRight", throwIfNotFound: true);
+        m_Player_InventoryLeft = m_Player.FindAction("InventoryLeft", throwIfNotFound: true);
+        m_Player_dropItem = m_Player.FindAction("dropItem", throwIfNotFound: true);
         // Camera
         m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
         m_Camera_Zoom = m_Camera.FindAction("Zoom", throwIfNotFound: true);
@@ -331,6 +394,9 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Fire;
     private readonly InputAction m_Player_FindPath;
+    private readonly InputAction m_Player_InventoryRight;
+    private readonly InputAction m_Player_InventoryLeft;
+    private readonly InputAction m_Player_dropItem;
     public struct PlayerActions
     {
         private @PlayerControl m_Wrapper;
@@ -339,6 +405,9 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @Fire => m_Wrapper.m_Player_Fire;
         public InputAction @FindPath => m_Wrapper.m_Player_FindPath;
+        public InputAction @InventoryRight => m_Wrapper.m_Player_InventoryRight;
+        public InputAction @InventoryLeft => m_Wrapper.m_Player_InventoryLeft;
+        public InputAction @dropItem => m_Wrapper.m_Player_dropItem;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -360,6 +429,15 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
                 @FindPath.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFindPath;
                 @FindPath.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFindPath;
                 @FindPath.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFindPath;
+                @InventoryRight.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInventoryRight;
+                @InventoryRight.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInventoryRight;
+                @InventoryRight.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInventoryRight;
+                @InventoryLeft.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInventoryLeft;
+                @InventoryLeft.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInventoryLeft;
+                @InventoryLeft.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInventoryLeft;
+                @dropItem.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDropItem;
+                @dropItem.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDropItem;
+                @dropItem.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDropItem;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -376,6 +454,15 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
                 @FindPath.started += instance.OnFindPath;
                 @FindPath.performed += instance.OnFindPath;
                 @FindPath.canceled += instance.OnFindPath;
+                @InventoryRight.started += instance.OnInventoryRight;
+                @InventoryRight.performed += instance.OnInventoryRight;
+                @InventoryRight.canceled += instance.OnInventoryRight;
+                @InventoryLeft.started += instance.OnInventoryLeft;
+                @InventoryLeft.performed += instance.OnInventoryLeft;
+                @InventoryLeft.canceled += instance.OnInventoryLeft;
+                @dropItem.started += instance.OnDropItem;
+                @dropItem.performed += instance.OnDropItem;
+                @dropItem.canceled += instance.OnDropItem;
             }
         }
     }
@@ -468,6 +555,9 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
         void OnFindPath(InputAction.CallbackContext context);
+        void OnInventoryRight(InputAction.CallbackContext context);
+        void OnInventoryLeft(InputAction.CallbackContext context);
+        void OnDropItem(InputAction.CallbackContext context);
     }
     public interface ICameraActions
     {
