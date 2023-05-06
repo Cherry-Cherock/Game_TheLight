@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7874519192586297845}
   - component: {fileID: 8339751007912982644}
   - component: {fileID: 4046626921462343679}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: ItemDetecter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -66,7 +66,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1201744771143079227}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: GroundCheckPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,7 +99,7 @@ GameObject:
   - component: {fileID: 1201744772222329049}
   - component: {fileID: 1201744772222329054}
   - component: {fileID: 1201744772222329055}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -199,7 +199,7 @@ GameObject:
   - component: {fileID: 3441530032364464636}
   - component: {fileID: 1085194958217519221}
   - component: {fileID: 8548955441735035159}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Lulu
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -422,7 +422,7 @@ GameObject:
   - component: {fileID: 8973676561012248366}
   - component: {fileID: 2151557301052696785}
   - component: {fileID: 8659856192744506951}
-  m_Layer: 9
+  m_Layer: 12
   m_Name: Start
   m_TagString: Untagged
   m_Icon: {fileID: 0}
