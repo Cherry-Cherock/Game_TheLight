@@ -45,7 +45,7 @@ public class IdleState : State
 
     public void OnExit()
     {
-        // timer = 0;
+        timer = 0;
     }
 }
 
