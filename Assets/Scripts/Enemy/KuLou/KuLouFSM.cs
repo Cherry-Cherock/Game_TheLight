@@ -29,6 +29,8 @@ public class Parameter
     public float attackArea;
     public Animator animator;
     public bool getHit;
+    //right = 1; left = 0;
+    public bool curDir;
 }
     
 public class KuLouFSM: MonoBehaviour
@@ -77,13 +79,16 @@ public class KuLouFSM: MonoBehaviour
             if (transform.position.x > target.position.x)
             {
                 transform.localScale = new Vector3(-1, 1, 1);
+                parameter.curDir = true;
             }
             else if (transform.position.x < target.position.x)
             {
                 transform.localScale = new Vector3(1, 1, 1);
+                parameter.curDir = false;
             }
         }
     }
+    
 
     private void OnTriggerEnter(Collider other)
     {

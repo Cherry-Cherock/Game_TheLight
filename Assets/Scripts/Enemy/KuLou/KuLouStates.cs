@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,27 +20,27 @@ public class IdleState : State
     }
     public void OnEnter()
     {
-        parameter.animator.SetBool("isIdle",true);
+        parameter.animator.Play("Idle");
     }
 
     public void OnUpdate()
     {
-        // timer += Time.deltaTime;
+        timer += Time.deltaTime;
         //
         if (parameter.getHit)
         {
             manager.TransitionState(StateType.Hit);
         }
-        // if (parameter.target != null &&
-        //     parameter.target.position.x >= parameter.chasePoints[0].position.x &&
-        //     parameter.target.position.x <= parameter.chasePoints[1].position.x)
-        // {
-        //     manager.TransitionState(StateType.React);
-        // }
-        // if (timer >= parameter.idleTime)
-        // {
-        //     manager.TransitionState(StateType.Patrol);
-        // }
+        if (parameter.target != null &&
+            parameter.target.position.x >= parameter.chasePoints[0].position.x &&
+            parameter.target.position.x <= parameter.chasePoints[1].position.x)
+        {
+            manager.TransitionState(StateType.React);
+        }
+        if (timer >= parameter.idleTime)
+        {
+            manager.TransitionState(StateType.Patrol);
+        }
     }
 
     public void OnExit()
@@ -68,7 +69,7 @@ public class PatrolState : State
     {
         manager.FlipTo(parameter.patrolPoints[patrolPosition]);
 
-        manager.transform.position = Vector2.MoveTowards(manager.transform.position,
+        manager.transform.position = Vector3.MoveTowards(manager.transform.position,
             parameter.patrolPoints[patrolPosition].position, parameter.moveSpeed * Time.deltaTime);
 
         if (parameter.getHit)
@@ -81,7 +82,7 @@ public class PatrolState : State
         {
             manager.TransitionState(StateType.React);
         }
-        if (Vector2.Distance(manager.transform.position, parameter.patrolPoints[patrolPosition].position) < .1f)
+        if (Vector3.Distance(manager.transform.position, parameter.patrolPoints[patrolPosition].position) < .1f)
         {
             manager.TransitionState(StateType.Idle);
         }
@@ -117,7 +118,7 @@ public class ChaseState : State
     {
         manager.FlipTo(parameter.target);
         if (parameter.target)
-            manager.transform.position = Vector2.MoveTowards(manager.transform.position,
+            manager.transform.position = Vector3.MoveTowards(manager.transform.position,
             parameter.target.position, parameter.chaseSpeed * Time.deltaTime);
 
         if (parameter.getHit)
@@ -130,9 +131,14 @@ public class ChaseState : State
         {
             manager.TransitionState(StateType.Idle);
         }
-        if (Physics2D.OverlapCircle(parameter.attackPoint.position, parameter.attackArea, parameter.targetLayer))
+        if (Physics.OverlapSphere(parameter.attackPoint.position, parameter.attackArea, parameter.targetLayer).Length>0)
         {
-            manager.TransitionState(StateType.Attack);
+            if (Math.Abs(manager.transform.position.z - parameter.target.position.z) < 0.1)
+            {
+               manager.TransitionState(StateType.Attack); 
+            }
+            Vector3 backPos = new Vector3(parameter.curDir ? manager.transform.position.x+0.8f :manager.transform.position.x-0.8f ,manager.transform.position.y,manager.transform.position.z);
+            manager.transform.position = Vector3.MoveTowards(manager.transform.position, backPos, parameter.chaseSpeed * Time.deltaTime);
         }
     }
 
