@@ -268,7 +268,7 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
                 {
                     ""name"": ""MapSetTarget"",
                     ""type"": ""Button"",
-                    ""id"": ""f25ce7bd-fd12-4202-bcf5-9c098e7f0e44"",
+                    ""id"": ""114b6d29-0aed-4027-9bfe-a0287106d63a"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -300,7 +300,7 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""5dbb1993-26b6-4b87-8986-116075a5990e"",
+                    ""id"": ""c8370f51-c15f-4ce7-9694-134f783d2d8d"",
                     ""path"": ""<Mouse>/rightButton"",
                     ""interactions"": """",
                     ""processors"": """",

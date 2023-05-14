@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Missile
   - MapItem
+  - PathCamera
   layers:
   - Default
   - TransparentFX

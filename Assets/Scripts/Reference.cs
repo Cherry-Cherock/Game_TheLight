@@ -28,7 +28,7 @@ public class Reference : MonoBehaviour
 	void Awake ()
 	{
 		inputSystem = InputManager.inputActions;
-		camera = Camera.current;
+		camera = GameObject.FindGameObjectWithTag("PathCamera").GetComponent<Camera>() as Camera;;
 	}
 	
 	private void OnEnable()
@@ -40,13 +40,15 @@ public class Reference : MonoBehaviour
 	
 	public void SetTarget(InputAction.CallbackContext context)
 	{
+		Debug.Log("按下设置目标。");
+		
 		_ray = camera.ScreenPointToRay(Input.mousePosition);
 		if (Physics.Raycast(_ray, out _hit, 1000f))
 		{
 			if (_hit.transform == transform)
 			{
 				GetComponent<MeshRenderer> ().material = endMat;
-				Debug.Log("设置目标点: "+"("+x+", "+y+")"+"  使用的相机: "+camera.name);
+				
 				MyAStar.instance.grids [x, y].type = GridType.End;
 				MyAStar.instance.targetX = x;
 				MyAStar.instance.targetY = y;

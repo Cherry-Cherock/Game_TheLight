@@ -233,24 +233,24 @@ public class HitState : State
     }
     public void OnEnter()
     {
-        parameter.animator.SetBool("isHit",true);
+        parameter.animator.Play("Hit");
         parameter.health--;
     }
 
     public void OnUpdate()
     {
-        // info = parameter.animator.GetCurrentAnimatorStateInfo(0);
+        info = parameter.animator.GetCurrentAnimatorStateInfo(0);
         //
         if (parameter.health <= 0)
         {
             manager.TransitionState(StateType.Death);
         }
-        // if (info.normalizedTime >= .95f)
-        // {
-        //     parameter.target = GameObject.FindWithTag("Player").transform;
-        //
-        //     manager.TransitionState(StateType.Chase);
-        // }
+        if (info.normalizedTime >= .95f)
+        {
+            parameter.target = GameObject.FindWithTag("Player").transform;
+        
+            manager.TransitionState(StateType.Chase);
+        }
     }
 
     public void OnExit()
@@ -271,7 +271,7 @@ public class DeathState : State
     }
     public void OnEnter()
     {
-        parameter.animator.SetBool("isDeath",true);
+        parameter.animator.Play("death");
     }
 
     public void OnUpdate()

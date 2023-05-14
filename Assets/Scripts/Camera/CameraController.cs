@@ -31,12 +31,12 @@ public class CameraController : MonoBehaviour
 
     private void Update()
     {
-        //滚轮实现摄像机视角的缩进和放远 
-        if (Input.GetAxis("Mouse ScrollWheel") != 0)
-        {
-            Camera.main.fieldOfView = Mathf.Clamp(Camera.main.fieldOfView, minmum, maximum);
-            Camera.main.fieldOfView -= Input.GetAxis("Mouse ScrollWheel") * view_value;
-        }
+        // //滚轮实现摄像机视角的缩进和放远 
+        // if (Input.GetAxis("Mouse ScrollWheel") != 0)
+        // {
+        //     Camera.main.fieldOfView = Mathf.Clamp(Camera.main.fieldOfView, minmum, maximum);
+        //     Camera.main.fieldOfView -= Input.GetAxis("Mouse ScrollWheel") * view_value;
+        // }
     }
 
     void LateUpdate()
