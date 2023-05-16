@@ -142,7 +142,7 @@ MonoBehaviour:
   projectilePrefab: {fileID: 2023485578591291518, guid: f176b3cc80756394c91ebfd61a2797c7,
     type: 3}
   prefabSpawn: {fileID: 1975489677}
-  gizmo_cameraRay: 0
+  gizmo_cameraRay: 1
   gizmo_ground: 0
   gizmo_target: 0
   gizmo_ignoredHeightTarget: 0

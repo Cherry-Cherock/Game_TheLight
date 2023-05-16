@@ -31,6 +31,7 @@ public class Parameter
     public bool getHit;
     //right = 1; left = 0;
     public bool curDir;
+    public GameObject floatPoint;
 }
     
 public class KuLouFSM: MonoBehaviour
@@ -39,6 +40,12 @@ public class KuLouFSM: MonoBehaviour
     private Dictionary<StateType, State> states = new Dictionary<StateType, State>();
 
     public Parameter parameter;
+
+    private void OnEnable()
+    {
+        ProjectAttack.hitE += getHit;
+    }
+
     void Start()
     {
         states.Add(StateType.Idle, new IdleState(this));
@@ -57,11 +64,6 @@ public class KuLouFSM: MonoBehaviour
     void Update()
     {
         currentState.OnUpdate();
-
-        if (Input.GetKeyDown(KeyCode.Return))
-        {
-            parameter.getHit = true;
-        }
     }
 
     public void TransitionState(StateType type)
@@ -88,7 +90,12 @@ public class KuLouFSM: MonoBehaviour
             }
         }
     }
-    
+
+    public void ShowFloatPoint()
+    {
+      GameObject go =  Instantiate(parameter.floatPoint, transform.position, Quaternion.identity) as GameObject;
+      go.transform.GetChild(0).GetComponent<TextMesh>().text = PlayerController.GetCurrentDamage().ToString();
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -104,6 +111,11 @@ public class KuLouFSM: MonoBehaviour
         {
             parameter.target = null;
         }
+    }
+
+    public void getHit()
+    {
+        parameter.getHit = true;
     }
 
     private void OnDrawGizmos()

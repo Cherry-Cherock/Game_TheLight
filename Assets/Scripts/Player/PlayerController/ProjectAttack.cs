@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,8 @@ public class ProjectAttack : MonoBehaviour
 
     #region Editor Settings
 
+    public delegate void EnemyHit();
+    public static event EnemyHit hitE;
     [SerializeField] private float speed;
     
 
@@ -32,10 +35,15 @@ public class ProjectAttack : MonoBehaviour
         rigidBody.velocity = transform.forward * speed;
     }
 
-    private void OnCollisionEnter(Collision col)
+
+    private void OnTriggerEnter(Collider other)
     {
         if (destoryed == false)
         {
+            if (other.CompareTag("Enemy"))
+            {
+                hitE.Invoke();
+            }
             Destroy(gameObject);
         }
     }

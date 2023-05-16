@@ -2373,9 +2373,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 771227519}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: SKELETON
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2899,7 +2899,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 6431
+    m_Bits: 14623
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -2918,13 +2918,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.20252405, y: -0, z: -0, w: 0.9792773}
+  m_LocalRotation: {x: 0.20364177, y: 0, z: 0, w: 0.97904545}
   m_LocalPosition: {x: 0, y: 5.04, z: -5.19}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 23.369, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 23.5, y: 0, z: 0}
 --- !u!114 &963194229
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5455,7 +5455,7 @@ GameObject:
   - component: {fileID: 1497849528}
   m_Layer: 11
   m_Name: AttackArea
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5517,7 +5517,7 @@ GameObject:
   - component: {fileID: 1520303525}
   m_Layer: 9
   m_Name: Icon
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5788,9 +5788,10 @@ GameObject:
   - component: {fileID: 1630163361}
   - component: {fileID: 1630163363}
   - component: {fileID: 1630163362}
+  - component: {fileID: 1630163364}
   m_Layer: 11
   m_Name: Skeleton
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5916,6 +5917,8 @@ MonoBehaviour:
     animator: {fileID: 1630163358}
     getHit: 0
     curDir: 1
+    floatPoint: {fileID: 6794375019068438268, guid: f6016221f383e1844b96d8eac4223577,
+      type: 3}
 --- !u!65 &1630163362
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5945,6 +5948,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!65 &1630163364
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1630163357}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.71629775, y: 1.2211947, z: 0.2}
+  m_Center: {x: -0.19185108, y: -0.3144027, z: 0}
 --- !u!1001 &1645040133
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6442,9 +6458,9 @@ GameObject:
   - component: {fileID: 1731040200}
   - component: {fileID: 1731040202}
   - component: {fileID: 1731040201}
-  m_Layer: 12
+  m_Layer: 11
   m_Name: Shadow
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8352,6 +8368,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 0.09
+      objectReference: {fileID: 0}
+    - target: {fileID: 7567201876266535717, guid: 3333ef735d83a7f488e64a8d2c4e0817,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7967060951364549655, guid: 3333ef735d83a7f488e64a8d2c4e0817,
         type: 3}

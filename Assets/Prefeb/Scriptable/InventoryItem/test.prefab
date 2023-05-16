@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 6705883659245243720}
   - component: {fileID: 5676750179291379293}
   - component: {fileID: 226412631211785698}
-  m_Layer: 0
+  - component: {fileID: 528875798272134751}
+  m_Layer: 13
   m_Name: test
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac59295ec33240644be92b8e2c1c38f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 25
+  speed: 15
 --- !u!54 &5676750179291379293
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -125,5 +126,18 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5089896
-  m_Center: {x: 0, y: -0.26601043, z: 0}
+  m_Radius: 0.5158619
+  m_Center: {x: 0.0068722395, y: -0.26601043, z: 0}
+--- !u!135 &528875798272134751
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9084424124676630021}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.51386195
+  m_Center: {x: 0.003435715, y: -0.2645736, z: 0}

@@ -234,6 +234,7 @@ public class HitState : State
     public void OnEnter()
     {
         parameter.animator.Play("Hit");
+        manager.ShowFloatPoint();
         parameter.health--;
     }
 

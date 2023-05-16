@@ -5,6 +5,8 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     //---------Player Setting--------------------
+    public int health;
+    public static int curDamage = 20;
     public float moveSpeed;
     public float jumpForce;
     public int jumpTime;
@@ -20,6 +22,12 @@ public class PlayerController : MonoBehaviour
     private bool jump;
     public LayerMask whatIsGround;
 
+
+    public static int GetCurrentDamage()
+    {
+        return curDamage;
+    }
+    
     private void Awake()
     {
         inputSystem = InputManager.inputActions;
