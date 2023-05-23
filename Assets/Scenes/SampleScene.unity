@@ -1843,6 +1843,50 @@ RectTransform:
   m_AnchoredPosition: {x: -10.383972, y: 0}
   m_SizeDelta: {x: -9.233, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &590701176
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 590701177}
+  - component: {fileID: 590701178}
+  m_Layer: 11
+  m_Name: Attack
+  m_TagString: EnemyAttack
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &590701177
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 590701176}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.87, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1630163360}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &590701178
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 590701176}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.5640602, y: 1.671676, z: 0.09305513}
+  m_Center: {x: 0.28203025, y: 0.00794524, z: 0.0044979453}
 --- !u!1 &597427271
 GameObject:
   m_ObjectHideFlags: 0
@@ -5882,6 +5926,7 @@ Transform:
   - {fileID: 30457152}
   - {fileID: 1497849528}
   - {fileID: 1520303524}
+  - {fileID: 590701177}
   m_Father: {fileID: 771227519}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5919,6 +5964,7 @@ MonoBehaviour:
     curDir: 1
     floatPoint: {fileID: 6794375019068438268, guid: f6016221f383e1844b96d8eac4223577,
       type: 3}
+    attackCollider: {fileID: 590701176}
 --- !u!65 &1630163362
 BoxCollider:
   m_ObjectHideFlags: 0

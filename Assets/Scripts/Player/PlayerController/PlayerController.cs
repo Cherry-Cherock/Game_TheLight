@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     //---------Player Setting--------------------
     public int health;
+    public int mana;
     public static int curDamage = 20;
     public float moveSpeed;
     public float jumpForce;
@@ -21,8 +22,8 @@ public class PlayerController : MonoBehaviour
     public int jumpCounter;
     private bool jump;
     public LayerMask whatIsGround;
-
-
+    
+    
     public static int GetCurrentDamage()
     {
         return curDamage;
@@ -123,6 +124,16 @@ public class PlayerController : MonoBehaviour
     {
         MapPlayerStartPoint.enabled =true;
     }
+    
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("EnemyAttack"))
+        {
+            health--;
+            ProFileUI.CurHealth = health;
+        }
+    }
+    
 
     // private void OnDisable()
     // {

@@ -8,6 +8,7 @@ TagManager:
   - MapItem
   - PathCamera
   - Enemy
+  - EnemyAttack
   layers:
   - Default
   - TransparentFX

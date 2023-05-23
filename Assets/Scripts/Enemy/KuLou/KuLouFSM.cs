@@ -32,6 +32,7 @@ public class Parameter
     //right = 1; left = 0;
     public bool curDir;
     public GameObject floatPoint;
+    public GameObject attackCollider;
 }
     
 public class KuLouFSM: MonoBehaviour
@@ -96,6 +97,16 @@ public class KuLouFSM: MonoBehaviour
       GameObject go =  Instantiate(parameter.floatPoint, transform.position, Quaternion.identity) as GameObject;
       go.transform.GetChild(0).GetComponent<TextMesh>().text = PlayerController.GetCurrentDamage().ToString();
     }
+
+    private void EnableAttackCollider()
+    {
+        parameter.attackCollider.SetActive(true);
+    }
+    private void DisableAttackCollider()
+    {
+        parameter.attackCollider.SetActive(false);
+    }
+
 
     private void OnTriggerEnter(Collider other)
     {

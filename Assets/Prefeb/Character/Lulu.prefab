@@ -303,10 +303,10 @@ CapsuleCollider:
   m_Material: {fileID: 13400000, guid: ff5a248e03f705244a53ca3cb89d55df, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.3112725
-  m_Height: 4.631667
+  m_Radius: 0.8626667
+  m_Height: 4.7614064
   m_Direction: 1
-  m_Center: {x: 0.04717517, y: -0.35824156, z: 0}
+  m_Center: {x: 0.057986856, y: -0.29337192, z: 0}
 --- !u!54 &1201744772446992032
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -354,7 +354,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08f22063d073dae46b5ebd62fde2e1d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 10
+  health: 20
+  mana: 20
   moveSpeed: 0
   jumpForce: 0
   jumpTime: 0
