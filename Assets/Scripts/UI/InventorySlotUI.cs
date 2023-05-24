@@ -18,12 +18,15 @@ public class InventorySlotUI : MonoBehaviour
     [SerializeField]
     private Image _itemIcon;
     
+    
+    
     [SerializeField]
     private Image _activeIndicator;
     
     [SerializeField]
     private TMP_Text _numberOfItems;
-
+    [SerializeField]
+    private TMP_Text _canUse;
     private InventorySlot _slot;
 
     private void Start()
@@ -47,11 +50,14 @@ public class InventorySlotUI : MonoBehaviour
         var item = state?.Item;
         var hasItem = item != null;
         var isStackable = hasItem && item.IsStackable;
+        var canBeUsed = hasItem && item.CanBeUsed && active;
         _itemIcon.enabled = hasItem;
         _numberOfItems.enabled = isStackable;
+        _canUse.enabled = canBeUsed;
         if (!hasItem) return;
         _itemIcon.sprite = item.UiSprite;
         if(isStackable) _numberOfItems.SetText(state.NumberOfItems.ToString());
+        if(canBeUsed) _canUse.SetText("E");
     }
 
     private void OnStateChanged(object sender, InventorySlotStateChangeMsg args)

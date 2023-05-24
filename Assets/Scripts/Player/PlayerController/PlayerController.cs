@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     //---------Player Setting--------------------
-    public int health;
+    public static int health;
     public int mana;
     public static int curDamage = 20;
     public float moveSpeed;
@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     public int jumpTime;
     public Transform groundPoint;
     public Animator anim;
+    public static bool dead = false;
     //------------------------------------
     private PlayerControl inputSystem;
     private BoxCollider MapPlayerStartPoint;
@@ -66,6 +67,7 @@ public class PlayerController : MonoBehaviour
 
     private void init()
     {
+        health = ProFileUI.healthMax;
         inputSystem.Enable();
         jumpCounter = jumpTime;
         jump = false;
@@ -130,6 +132,8 @@ public class PlayerController : MonoBehaviour
         if (other.CompareTag("EnemyAttack"))
         {
             health--;
+            Debug.Log("目前血量"+ProFileUI.CurHealth+"/"+ProFileUI.healthMax);
+            if (health <= 0) dead = true;
             ProFileUI.CurHealth = health;
         }
     }

@@ -113,6 +113,44 @@ namespace Player.InventorySystem
             return new ItemStack();
         }
 
+        public ItemStack UseItem(int atIndex)
+        {
+            if (!_slots[atIndex].HasItem)
+                throw new InventoryException(ErrorAction.Remove, "slot is empty!");
+            if (_slots[atIndex].Item.CanBeUsed)
+            {
+                
+                //如果是消耗品
+                if (_slots[atIndex].Item.Id >= 100 && _slots[atIndex].Item.Id <= 199)
+                {
+                    //如果是血瓶
+                    if (_slots[atIndex].Item.Name.Equals("Health Potion"))
+                    {
+                        PlayerController.health += _slots[atIndex].Item.EffectValue;
+                        //不超出血量最大值
+                        HPMaxLimit();
+                        ProFileUI.CurHealth = PlayerController.health;
+                        Debug.Log("目前血量"+ProFileUI.CurHealth+"/"+ProFileUI.healthMax);
+                        _slots[atIndex].NumberOfItems--;
+                    }
+                    //如果消耗完，清空插槽。
+                    if (_slots[atIndex].NumberOfItems<=0)
+                    {
+                        ClearSlot(atIndex);
+                    } 
+                }
+                //如果是武器
+                else if (_slots[atIndex].Item.Id >= 200 && _slots[atIndex].Item.Id <= 299)
+                {
+                    Debug.Log("是武器");
+                    PlayerController.curDamage = _slots[atIndex].Item.EffectValue;
+                    Debug.Log("攻击改为："+PlayerController.curDamage);
+                    ClearSlot(atIndex);
+                }
+            }
+            return new ItemStack();
+        }
+
         public ItemStack RemoveItem(ItemStack itemStack)
         {
             var itemSlot = FindSlot(itemStack.Item);
@@ -147,6 +185,13 @@ namespace Player.InventorySystem
         public InventorySlot GetActiveSlot()
         {
             return _slots[ActiveSlotIndex];
+        }
+
+        public void HPMaxLimit()
+        {
+            PlayerController.health = PlayerController.health >= ProFileUI.healthMax
+                ? ProFileUI.healthMax
+                : PlayerController.health;
         }
     }
 }

@@ -8,12 +8,12 @@ public class ProFileUI : MonoBehaviour
 {
     //HP
     public static int CurHealth;
-    public int healthMax;
+    public static int healthMax = 20;
     private Image HPBar;
     
     //mana
     public static int CurMana;
-    public int manaMax;
+    public static int manaMax = 20;
     private Image ManaBar;
     void Start()
     {

@@ -102,7 +102,7 @@ MonoBehaviour:
     _item: {fileID: 0}
     _numberOfItems: 0
   _spriteRenderer: {fileID: 2023485578591291490}
-  _colliderEnableAfter: 10
+  _colliderEnableAfter: 3
   _dropGravity: 2
   _dropMinForce: 3
   _dropMaxForce: 5

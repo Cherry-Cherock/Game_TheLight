@@ -235,7 +235,7 @@ public class HitState : State
     {
         parameter.animator.Play("Hit");
         manager.ShowFloatPoint();
-        parameter.health--;
+        parameter.health -= PlayerController.curDamage;
     }
 
     public void OnUpdate()

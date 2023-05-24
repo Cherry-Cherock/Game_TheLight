@@ -16,15 +16,17 @@ public class InventoryInputHandler : MonoBehaviour
     private void OnEnable()
     {
         inputSystem.Enable();
-        inputSystem.Player.InventoryLeft.performed += PreviousItem;
-        inputSystem.Player.InventoryRight.performed += NextItem;
+        inputSystem.Inventory.IndexLeft.performed += PreviousItem;
+        inputSystem.Inventory.IndexRight.performed += NextItem;
+        inputSystem.Inventory.Use.performed += UseItem;
         inputSystem.Player.dropItem.performed += OnDropItem;
     }
 
     private void OnDisable()
     {
-        inputSystem.Player.InventoryLeft.performed -= PreviousItem;
-        inputSystem.Player.InventoryRight.performed -= NextItem;
+        inputSystem.Inventory.IndexLeft.performed -= PreviousItem;
+        inputSystem.Inventory.IndexRight.performed -= NextItem;
+        inputSystem.Inventory.Use.performed -= UseItem;
         inputSystem.Player.dropItem.performed -= OnDropItem;
     }
 
@@ -46,6 +48,14 @@ public class InventoryInputHandler : MonoBehaviour
     private void PreviousItem(InputAction.CallbackContext ctx)
     {
         _inventory.ActivateSlot(_inventory.ActiveSlotIndex -1);
+    }
+
+    private void UseItem(InputAction.CallbackContext ctx)
+    {
+        if (_inventory.GetActiveSlot().HasItem)
+        {
+            _inventory.UseItem(_inventory.ActiveSlotIndex);
+        }
     }
     
 }
