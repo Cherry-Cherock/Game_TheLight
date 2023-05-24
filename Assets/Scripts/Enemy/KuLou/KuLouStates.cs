@@ -273,6 +273,7 @@ public class DeathState : State
     public void OnEnter()
     {
         parameter.animator.Play("death");
+        manager.Death();
     }
 
     public void OnUpdate()

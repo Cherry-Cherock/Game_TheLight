@@ -98,6 +98,11 @@ public class KuLouFSM: MonoBehaviour
       go.transform.GetChild(0).GetComponent<TextMesh>().text = PlayerController.GetCurrentDamage().ToString();
     }
 
+    public void Death()
+    {
+        GetComponent<Droploot>().Instantiateloot(transform.position);
+    }
+
     private void EnableAttackCollider()
     {
         parameter.attackCollider.SetActive(true);

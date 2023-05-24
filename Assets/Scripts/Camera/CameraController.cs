@@ -6,6 +6,15 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     public Transform target;
+    //自由视角
+    private float mX = 0.0f;
+    private float mY = 0.0f;
+
+    private float MinLimitY=5;
+    private float MaxLimitY=80;
+    
+    private float MinLimitX=-50;
+    private float MaxLimitX=50;
     //滚轮实现镜头缩进和拉远的范围
     private float sensitivetyMouseWheel = 10f;
     private float maximum = 100;
@@ -41,6 +50,20 @@ public class CameraController : MonoBehaviour
 
     void LateUpdate()
     {
+        mX += Input.GetAxis("Mouse X") * sensitivetyMouseWheel * 0.02f;
+        mY -= Input.GetAxis("Mouse Y") * sensitivetyMouseWheel * 0.02f;
+        mX = ClampAngle(mX, MinLimitX, MaxLimitX);
+        mY = ClampAngle(mY, MinLimitY, MaxLimitY);
+        Quaternion mRotation = Quaternion.Euler(mY,mX,0);
+        
         transform.position = target.position - offset;
+        transform.rotation = Quaternion.Slerp(transform.rotation,mRotation,Time.deltaTime*2.5f);
+    }
+
+    private float ClampAngle(float angle, float min, float max)
+    {
+        if (angle < -360)angle += 360;
+        if (angle > 360) angle -= 360;
+        return Mathf.Clamp(angle, min, max);
     }
 }
