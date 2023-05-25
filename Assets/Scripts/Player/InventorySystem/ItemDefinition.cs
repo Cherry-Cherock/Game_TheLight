@@ -21,7 +21,6 @@ namespace Player.InventorySystem
         private Sprite _inGameSprite;
         [SerializeField]
         private Sprite _uiSprite;
-
         [SerializeField] 
         private int _dropChance;
 

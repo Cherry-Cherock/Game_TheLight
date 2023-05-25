@@ -187,6 +187,15 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""FreeView"",
+                    ""type"": ""Button"",
+                    ""id"": ""29738c7e-d4d6-4e90-a88f-8a595c20aad0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -198,6 +207,17 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Zoom"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1c863f91-128b-40bf-bda6-f367661be7a2"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": ""Press(behavior=2)"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""FreeView"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -352,6 +372,7 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
         // Camera
         m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
         m_Camera_Zoom = m_Camera.FindAction("Zoom", throwIfNotFound: true);
+        m_Camera_FreeView = m_Camera.FindAction("FreeView", throwIfNotFound: true);
         // Game
         m_Game = asset.FindActionMap("Game", throwIfNotFound: true);
         m_Game_PausedGame = m_Game.FindAction("PausedGame", throwIfNotFound: true);
@@ -487,11 +508,13 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Camera;
     private ICameraActions m_CameraActionsCallbackInterface;
     private readonly InputAction m_Camera_Zoom;
+    private readonly InputAction m_Camera_FreeView;
     public struct CameraActions
     {
         private @PlayerControl m_Wrapper;
         public CameraActions(@PlayerControl wrapper) { m_Wrapper = wrapper; }
         public InputAction @Zoom => m_Wrapper.m_Camera_Zoom;
+        public InputAction @FreeView => m_Wrapper.m_Camera_FreeView;
         public InputActionMap Get() { return m_Wrapper.m_Camera; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -504,6 +527,9 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
                 @Zoom.started -= m_Wrapper.m_CameraActionsCallbackInterface.OnZoom;
                 @Zoom.performed -= m_Wrapper.m_CameraActionsCallbackInterface.OnZoom;
                 @Zoom.canceled -= m_Wrapper.m_CameraActionsCallbackInterface.OnZoom;
+                @FreeView.started -= m_Wrapper.m_CameraActionsCallbackInterface.OnFreeView;
+                @FreeView.performed -= m_Wrapper.m_CameraActionsCallbackInterface.OnFreeView;
+                @FreeView.canceled -= m_Wrapper.m_CameraActionsCallbackInterface.OnFreeView;
             }
             m_Wrapper.m_CameraActionsCallbackInterface = instance;
             if (instance != null)
@@ -511,6 +537,9 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
                 @Zoom.started += instance.OnZoom;
                 @Zoom.performed += instance.OnZoom;
                 @Zoom.canceled += instance.OnZoom;
+                @FreeView.started += instance.OnFreeView;
+                @FreeView.performed += instance.OnFreeView;
+                @FreeView.canceled += instance.OnFreeView;
             }
         }
     }
@@ -624,6 +653,7 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
     public interface ICameraActions
     {
         void OnZoom(InputAction.CallbackContext context);
+        void OnFreeView(InputAction.CallbackContext context);
     }
     public interface IGameActions
     {

@@ -2,8 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+ using UnityEngine.InputSystem;
 
-public class CameraController : MonoBehaviour
+ public class CameraController : MonoBehaviour
 {
     public Transform target;
     //自由视角
@@ -15,6 +16,11 @@ public class CameraController : MonoBehaviour
     
     private float MinLimitX=-50;
     private float MaxLimitX=50;
+
+    private Quaternion mRotation;
+    //自由视角
+    private bool freeView = false;
+    
     //滚轮实现镜头缩进和拉远的范围
     private float sensitivetyMouseWheel = 10f;
     private float maximum = 100;
@@ -31,6 +37,12 @@ public class CameraController : MonoBehaviour
     private void OnEnable()
     {
         inputSystem.Enable();
+        inputSystem.Camera.FreeView.performed += EnableFreeView;
+    }
+
+    private void OnDisable()
+    {
+        inputSystem.Camera.FreeView.performed -= EnableFreeView;
     }
 
     void Start()
@@ -50,15 +62,31 @@ public class CameraController : MonoBehaviour
 
     void LateUpdate()
     {
-        mX += Input.GetAxis("Mouse X") * sensitivetyMouseWheel * 0.02f;
-        mY -= Input.GetAxis("Mouse Y") * sensitivetyMouseWheel * 0.02f;
-        mX = ClampAngle(mX, MinLimitX, MaxLimitX);
-        mY = ClampAngle(mY, MinLimitY, MaxLimitY);
-        Quaternion mRotation = Quaternion.Euler(mY,mX,0);
-        
+        if (freeView)
+        {
+            mX += Input.GetAxis("Mouse X") * sensitivetyMouseWheel * 0.02f;
+            mY -= Input.GetAxis("Mouse Y") * sensitivetyMouseWheel * 0.02f;
+            mX = ClampAngle(mX, MinLimitX, MaxLimitX);
+            mY = ClampAngle(mY, MinLimitY, MaxLimitY);
+            mRotation = Quaternion.Euler(mY,mX,0);
+        }
+        else
+        {
+            mRotation = Quaternion.Euler(23,0,0); 
+            
+        }
         transform.position = target.position - offset;
         transform.rotation = Quaternion.Slerp(transform.rotation,mRotation,Time.deltaTime*2.5f);
     }
+
+    private void EnableFreeView(InputAction.CallbackContext ctx)
+    {
+        mX = 0.0f;
+        mY = 0.0f;
+        freeView = !freeView;
+    }
+    
+    
 
     private float ClampAngle(float angle, float min, float max)
     {

@@ -23,7 +23,7 @@ namespace Player.InventorySystem
 
         //-----drop item------------
         [SerializeField] 
-        private float _colliderEnableAfter = 3f;
+        private float _colliderEnableAfter = 1.5f;
         [SerializeField]
         private float _dropGravity = 2f;
         [SerializeField]
