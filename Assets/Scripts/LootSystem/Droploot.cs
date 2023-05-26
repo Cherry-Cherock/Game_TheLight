@@ -62,7 +62,6 @@ public class Droploot : MonoBehaviour
         yield return new WaitUntil(() => rb.velocity.y < -velocity);
         rb.velocity = Vector3.zero;
         rb.useGravity = false;
-        
     }
  
 }

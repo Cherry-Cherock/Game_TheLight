@@ -4,7 +4,6 @@ using UnityEngine;
 using System;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 
 public class GameManager : SingletonMono<GameManager>
 {
@@ -14,9 +13,16 @@ public class GameManager : SingletonMono<GameManager>
         RUNNING,
         PAUSED,
         INVENTORY,
+        SHOP,
         TUTORIAL,
         MAP,
         GAME_OVER,
+    }
+    
+    public enum InteractionType
+    {
+        NONE,
+        SHOP
     }
     
     public enum GameLevel
@@ -29,6 +35,7 @@ public class GameManager : SingletonMono<GameManager>
     public  EventGameState              OnGameStateChanged;
     private List<AsyncOperation>        loadOperations;
     public static  GameState            currentGameState = GameState.RUNNING;
+    public static InteractionType       currentInteractionState = InteractionType.NONE;
     private GameLevel                   currentLevelName = GameLevel.TEST;
     private PlayerControl inputSystem;
     #endregion
@@ -42,11 +49,17 @@ public class GameManager : SingletonMono<GameManager>
     {
         inputSystem.Enable();
         inputSystem.Game.PausedGame.started += PauseCurrentGame;
+        ShopInteraction.shop += ShopCurrentGame;
     }
 
     public void PauseCurrentGame(InputAction.CallbackContext context)
     {
         TogglePause();
+    }
+
+    public void ShopCurrentGame()
+    {
+        ToggleShop();
     }
 
     public GameState CurrentGameState
@@ -75,7 +88,11 @@ public class GameManager : SingletonMono<GameManager>
                 Time.timeScale      = 0.0f;
                 AudioListener.pause = true;
                 break;
-
+            
+            case GameState.SHOP:
+                Time.timeScale      = 0.0f;
+                AudioListener.pause = true;
+                break;
             case GameState.INVENTORY:
                 Time.timeScale = 0.0f;
                 break;
@@ -102,6 +119,11 @@ public class GameManager : SingletonMono<GameManager>
     public void TogglePause(){
          UpdateState(currentGameState == GameState.RUNNING ? GameState.PAUSED : GameState.RUNNING);
          Debug.Log(currentGameState);
+    }
+    
+    public void ToggleShop(){
+        UpdateState(currentGameState == GameState.RUNNING ? GameState.SHOP : GameState.RUNNING);
+        Debug.Log(currentGameState);
     }
        
     

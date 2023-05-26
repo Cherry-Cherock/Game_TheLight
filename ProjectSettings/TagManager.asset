@@ -9,6 +9,7 @@ TagManager:
   - PathCamera
   - Enemy
   - EnemyAttack
+  - Shop
   layers:
   - Default
   - TransparentFX

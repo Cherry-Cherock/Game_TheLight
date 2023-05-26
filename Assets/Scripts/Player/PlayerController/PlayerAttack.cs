@@ -150,7 +150,7 @@ public class PlayerAttack : MonoBehaviour
 
         private void Shoot()
         {
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0) && GameManager.currentGameState == GameManager.GameState.RUNNING)
             {
                 var projectile = Instantiate(projectilePrefab, prefabSpawn.position, Quaternion.identity);
                 projectile.transform.forward = aimedTransform.forward;
