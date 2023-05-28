@@ -15,6 +15,7 @@ public class StartUI : BaseUI
         
         AddPointerClickEvent("Button_Start", go =>
         {
+            
             GameManager.HandleGameStart();
             transform.gameObject.SetActive(false);
         });

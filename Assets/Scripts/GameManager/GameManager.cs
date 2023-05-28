@@ -34,7 +34,7 @@ public class GameManager : SingletonMono<GameManager>
     #region GAME MANAGER VARIABLES
     public  EventGameState              OnGameStateChanged;
     private List<AsyncOperation>        loadOperations;
-    public static  GameState            currentGameState = GameState.RUNNING;
+    public static  GameState            currentGameState = GameState.PREGAME;
     public static InteractionType       currentInteractionState = InteractionType.NONE;
     private GameLevel                   currentLevelName = GameLevel.TEST;
     private PlayerControl inputSystem;
@@ -50,11 +50,13 @@ public class GameManager : SingletonMono<GameManager>
         inputSystem.Enable();
         inputSystem.Game.PausedGame.started += PauseCurrentGame;
         ShopInteraction.shop += ShopCurrentGame;
+        TogglePregame();
     }
 
     public void PauseCurrentGame(InputAction.CallbackContext context)
     {
         TogglePause();
+        UIManager.Show<PauseUI>();
     }
 
     public void ShopCurrentGame()
@@ -76,7 +78,7 @@ public class GameManager : SingletonMono<GameManager>
         switch (CurrentGameState)
         {
             case GameState.PREGAME:
-                Time.timeScale = 1.0f;
+                Time.timeScale = 0.0f;
                 break;
 
             case GameState.RUNNING:
@@ -125,6 +127,12 @@ public class GameManager : SingletonMono<GameManager>
         UpdateState(currentGameState == GameState.RUNNING ? GameState.SHOP : GameState.RUNNING);
         Debug.Log(currentGameState);
     }
+
+    public void TogglePregame()
+    {
+        UpdateState(GameState.PREGAME);
+    }
+    
        
     
     public void ToggleInventory() =>
@@ -137,7 +145,8 @@ public class GameManager : SingletonMono<GameManager>
     public static void HandleGameStart()
     {
         currentGameState = GameState.RUNNING;
-        
+        Time.timeScale      = 1.0f;
+        AudioListener.pause = false;
     }
     void HandleGameOver()
     {

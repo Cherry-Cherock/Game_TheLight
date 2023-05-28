@@ -13,6 +13,7 @@ public class GameStart : SingletonMono<GameStart>
         // UIData.Init();
         
         Debug.Log("---***---初始化脚本---***---");
+        
         //------初始化设置------
         GameSetting.InitSetting();
         
