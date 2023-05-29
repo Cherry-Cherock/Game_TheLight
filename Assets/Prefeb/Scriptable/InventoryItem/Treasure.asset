@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1012e546d766ec84bb756aca82ffca80, type: 3}
   m_Name: Treasure
   m_EditorClassIdentifier: 
-  _id: 0
+  _id: 4
   _name: Treasure
   _isStackable: 0
   _effectValue: 0

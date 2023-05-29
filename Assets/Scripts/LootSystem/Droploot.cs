@@ -52,7 +52,7 @@ public class Droploot : MonoBehaviour
                 lootGameObject.GetComponent<Rigidbody>().useGravity = true;
                 var dropForce = Random.Range(3+i, 5+i);
                 lootGameObject.GetComponent<Rigidbody>().velocity = new Vector3(Mathf.Sign(transform.localScale.x) * dropForce, 5+i);
-                StartCoroutine(DisableGravity(lootGameObject.GetComponent<Rigidbody>(),5+i));
+                StartCoroutine(DisableGravity(lootGameObject.GetComponent<Rigidbody>(),7+i));
             }
         }
     }

@@ -17,7 +17,7 @@ public enum StateType
 [Serializable]
 public class Parameter
 {
-    public int health;
+    public int basicHP;
     public float moveSpeed;
     public float chaseSpeed;
     public float idleTime;
@@ -39,12 +39,15 @@ public class KuLouFSM: MonoBehaviour
 {
     private State currentState;
     private Dictionary<StateType, State> states = new Dictionary<StateType, State>();
-
+    public int EnemyHP;
     public Parameter parameter;
 
     private void OnEnable()
     {
+        EnemyHP = parameter.basicHP * (GameSetting.DifficultyIndex + 1);
+        Debug.Log("敌人血量："+EnemyHP+"=> ("+parameter.basicHP+") "+"* ("+GameSetting.DifficultyIndex + 1+")");
         ProjectAttack.hitE += getHit;
+        
     }
 
     void Start()

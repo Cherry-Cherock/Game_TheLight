@@ -235,14 +235,14 @@ public class HitState : State
     {
         parameter.animator.Play("Hit");
         manager.ShowFloatPoint();
-        parameter.health -= PlayerController.curDamage;
+        manager.EnemyHP -= PlayerController.curDamage;
     }
 
     public void OnUpdate()
     {
         info = parameter.animator.GetCurrentAnimatorStateInfo(0);
         //
-        if (parameter.health <= 0)
+        if (manager.EnemyHP <= 0)
         {
             manager.TransitionState(StateType.Death);
         }
