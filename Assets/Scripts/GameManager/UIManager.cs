@@ -12,7 +12,7 @@ public class UIManager :SingletonMono<UIManager>
    
    	private BaseUI _currentUI;
    
-   	private readonly Stack<BaseUI> _historyList = new Stack<BaseUI>();
+   	private  Stack<BaseUI> _historyList = new Stack<BaseUI>();
    
    	public static T GetUI<T>() where T : BaseUI
    	{
@@ -73,7 +73,12 @@ public class UIManager :SingletonMono<UIManager>
    		{
    			Show(_uiManager._historyList.Pop(), false);
    		}
-   	}
+    }
+
+    public static void CloseCurrentUI()
+    {
+	    _uiManager._currentUI.Hide();
+    }
    
    	private void Awake()
     {

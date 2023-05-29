@@ -13,7 +13,6 @@ public class GameManager : SingletonMono<GameManager>
         RUNNING,
         PAUSED,
         INVENTORY,
-        SHOP,
         TUTORIAL,
         MAP,
         GAME_OVER,
@@ -49,7 +48,8 @@ public class GameManager : SingletonMono<GameManager>
     {
         inputSystem.Enable();
         inputSystem.Game.PausedGame.started += PauseCurrentGame;
-        ShopInteraction.shop += ShopCurrentGame;
+        ShopInteraction.shop += PauseGame;
+        InventoryInputHandler.usInfo += PauseGame;
         TogglePregame();
     }
 
@@ -59,10 +59,13 @@ public class GameManager : SingletonMono<GameManager>
         UIManager.Show<PauseUI>();
     }
 
-    public void ShopCurrentGame()
+    
+    public void PauseGame()
     {
-        ToggleShop();
+        TogglePause();
     }
+  
+    
 
     public GameState CurrentGameState
     {
@@ -87,11 +90,6 @@ public class GameManager : SingletonMono<GameManager>
                 break;
 
             case GameState.PAUSED:
-                Time.timeScale      = 0.0f;
-                AudioListener.pause = true;
-                break;
-            
-            case GameState.SHOP:
                 Time.timeScale      = 0.0f;
                 AudioListener.pause = true;
                 break;
@@ -123,10 +121,7 @@ public class GameManager : SingletonMono<GameManager>
          Debug.Log(currentGameState);
     }
     
-    public void ToggleShop(){
-        UpdateState(currentGameState == GameState.RUNNING ? GameState.SHOP : GameState.RUNNING);
-        Debug.Log(currentGameState);
-    }
+
 
     public void TogglePregame()
     {

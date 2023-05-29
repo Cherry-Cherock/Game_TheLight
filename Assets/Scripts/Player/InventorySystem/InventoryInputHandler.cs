@@ -7,6 +7,9 @@ public class InventoryInputHandler : MonoBehaviour
 
     private Inventory _inventory;
     private PlayerControl inputSystem;
+    //------Event-------
+    public delegate void UserInfoEvent(); 
+    public static event UserInfoEvent usInfo;
     private void Awake()
     {
         _inventory = GetComponent<Inventory>();
@@ -16,6 +19,7 @@ public class InventoryInputHandler : MonoBehaviour
     private void OnEnable()
     {
         inputSystem.Enable();
+        inputSystem.Player.UserInfo.performed += UserInfo;
         inputSystem.Inventory.IndexLeft.performed += PreviousItem;
         inputSystem.Inventory.IndexRight.performed += NextItem;
         inputSystem.Inventory.Use.performed += UseItem;
@@ -24,6 +28,7 @@ public class InventoryInputHandler : MonoBehaviour
 
     private void OnDisable()
     {
+        inputSystem.Player.UserInfo.performed -= UserInfo;
         inputSystem.Inventory.IndexLeft.performed -= PreviousItem;
         inputSystem.Inventory.IndexRight.performed -= NextItem;
         inputSystem.Inventory.Use.performed -= UseItem;
@@ -56,6 +61,21 @@ public class InventoryInputHandler : MonoBehaviour
         {
             _inventory.UseItem(_inventory.ActiveSlotIndex);
         }
+    }
+
+    private void UserInfo(InputAction.CallbackContext ctx)
+    {
+        usInfo.Invoke();
+        Debug.Log("现在："+GameManager.currentGameState);
+        if (GameManager.currentGameState == GameManager.GameState.RUNNING)
+        {
+            UIManager.CloseCurrentUI();
+        }
+        else
+        {
+            UIManager.Show<UserInfoUI>();
+        }
+        
     }
     
 }

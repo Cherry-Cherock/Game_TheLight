@@ -80,6 +80,15 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""UserInfo"",
+                    ""type"": ""Button"",
+                    ""id"": ""7453c815-1607-4316-bf37-de05cd105973"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -190,6 +199,17 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Interaction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""72eca3b3-6bb4-4195-a4fd-8a4d11a39393"",
+                    ""path"": ""<Keyboard>/i"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""UserInfo"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -390,6 +410,7 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
         m_Player_FindPath = m_Player.FindAction("FindPath", throwIfNotFound: true);
         m_Player_dropItem = m_Player.FindAction("dropItem", throwIfNotFound: true);
         m_Player_Interaction = m_Player.FindAction("Interaction", throwIfNotFound: true);
+        m_Player_UserInfo = m_Player.FindAction("UserInfo", throwIfNotFound: true);
         // Camera
         m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
         m_Camera_Zoom = m_Camera.FindAction("Zoom", throwIfNotFound: true);
@@ -469,6 +490,7 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_FindPath;
     private readonly InputAction m_Player_dropItem;
     private readonly InputAction m_Player_Interaction;
+    private readonly InputAction m_Player_UserInfo;
     public struct PlayerActions
     {
         private @PlayerControl m_Wrapper;
@@ -479,6 +501,7 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
         public InputAction @FindPath => m_Wrapper.m_Player_FindPath;
         public InputAction @dropItem => m_Wrapper.m_Player_dropItem;
         public InputAction @Interaction => m_Wrapper.m_Player_Interaction;
+        public InputAction @UserInfo => m_Wrapper.m_Player_UserInfo;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -506,6 +529,9 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
                 @Interaction.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteraction;
                 @Interaction.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteraction;
                 @Interaction.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteraction;
+                @UserInfo.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUserInfo;
+                @UserInfo.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUserInfo;
+                @UserInfo.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUserInfo;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -528,6 +554,9 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
                 @Interaction.started += instance.OnInteraction;
                 @Interaction.performed += instance.OnInteraction;
                 @Interaction.canceled += instance.OnInteraction;
+                @UserInfo.started += instance.OnUserInfo;
+                @UserInfo.performed += instance.OnUserInfo;
+                @UserInfo.canceled += instance.OnUserInfo;
             }
         }
     }
@@ -679,6 +708,7 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
         void OnFindPath(InputAction.CallbackContext context);
         void OnDropItem(InputAction.CallbackContext context);
         void OnInteraction(InputAction.CallbackContext context);
+        void OnUserInfo(InputAction.CallbackContext context);
     }
     public interface ICameraActions
     {
