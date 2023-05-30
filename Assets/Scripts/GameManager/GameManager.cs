@@ -56,7 +56,14 @@ public class GameManager : SingletonMono<GameManager>
     public void PauseCurrentGame(InputAction.CallbackContext context)
     {
         TogglePause();
-        UIManager.Show<PauseUI>();
+        if (currentGameState == GameState.RUNNING)
+        {
+            UIManager.CloseCurrentUI();
+        }
+        else
+        {
+            UIManager.Show<PauseUI>();
+        }
     }
 
     
