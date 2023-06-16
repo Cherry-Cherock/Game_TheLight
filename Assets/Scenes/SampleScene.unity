@@ -8306,12 +8306,12 @@ PrefabInstance:
     - target: {fileID: 1015336282030291198, guid: a8c50596d9f1c45479ffd647ebf2ff6e,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 122.58284
+      value: 144.20285
       objectReference: {fileID: 0}
     - target: {fileID: 1015336282030291198, guid: a8c50596d9f1c45479ffd647ebf2ff6e,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 61.29142
+      value: 72.101425
       objectReference: {fileID: 0}
     - target: {fileID: 1015336282030291198, guid: a8c50596d9f1c45479ffd647ebf2ff6e,
         type: 3}
@@ -9321,12 +9321,12 @@ PrefabInstance:
     - target: {fileID: 1015336283711557726, guid: a8c50596d9f1c45479ffd647ebf2ff6e,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 110.63284
+      value: 89.01285
       objectReference: {fileID: 0}
     - target: {fileID: 1015336283711557726, guid: a8c50596d9f1c45479ffd647ebf2ff6e,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 206.29926
+      value: 217.10927
       objectReference: {fileID: 0}
     - target: {fileID: 1015336283711557726, guid: a8c50596d9f1c45479ffd647ebf2ff6e,
         type: 3}
@@ -9928,7 +9928,7 @@ GameObject:
   - component: {fileID: 1630163364}
   - component: {fileID: 1630163365}
   m_Layer: 11
-  m_Name: Skeleton
+  m_Name: Skeleton+4
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10039,6 +10039,7 @@ MonoBehaviour:
   EnemyHP: 0
   parameter:
     basicHP: 20
+    curDamage: 4
     moveSpeed: 1
     chaseSpeed: 1
     idleTime: 2

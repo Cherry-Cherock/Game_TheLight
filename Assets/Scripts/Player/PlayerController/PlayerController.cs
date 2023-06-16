@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     public static int health;
     public int mana;
     public static int curDamage = 20;
+    public static int curDefense = 0;
     public float moveSpeed;
     public float jumpForce;
     public int jumpTime;
@@ -131,7 +132,10 @@ public class PlayerController : MonoBehaviour
     {
         if (other.CompareTag("EnemyAttack"))
         {
-            health--;
+            var enemyName = other.gameObject.transform.parent.name;
+            Debug.Log( "扣血："+int.Parse(enemyName.Substring(enemyName.LastIndexOf("+")+1)));  
+            
+            health -= int.Parse(enemyName.Substring(enemyName.LastIndexOf("+")+1));
             Debug.Log("目前血量"+ProFileUI.CurHealth+"/"+ProFileUI.healthMax);
             if (health <= 0) dead = true;
             ProFileUI.CurHealth = health;

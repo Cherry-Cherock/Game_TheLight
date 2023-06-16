@@ -18,6 +18,7 @@ public enum StateType
 public class Parameter
 {
     public int basicHP;
+    public int curDamage;
     public float moveSpeed;
     public float chaseSpeed;
     public float idleTime;
@@ -52,6 +53,7 @@ public class KuLouFSM: MonoBehaviour
 
     void Start()
     {
+        UpdateEnemyName();
         states.Add(StateType.Idle, new IdleState(this));
         states.Add(StateType.Patrol, new PatrolState(this));
         states.Add(StateType.Chase, new ChaseState(this));
@@ -63,6 +65,18 @@ public class KuLouFSM: MonoBehaviour
         TransitionState(StateType.Idle);
 
         parameter.animator = transform.GetComponent<Animator>();
+    }
+    
+    private void OnValidate()
+    {
+        UpdateEnemyName();
+    }
+    
+    private void UpdateEnemyName()
+    {
+        var name = "Skeleton";
+        var DamageNum = parameter.curDamage ;
+        gameObject.name = $"{name}+{DamageNum}";
     }
 
     void Update()
