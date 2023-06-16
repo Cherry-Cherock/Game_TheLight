@@ -37,7 +37,24 @@ public class Reference : MonoBehaviour
 		inputSystem.Game.MapSetTarget.started += SetTarget;
 	}
 
-	
+
+	private void Start()
+	{
+		GameObject player = GameObject.FindWithTag("Player");
+		var position = player.transform.position;
+		Debug.Log("现在玩家位置："+(27+Mathf.RoundToInt(Mathf.Round(position.x * 10f)/10f/1.5f)) +", "+(27+Mathf.RoundToInt(Mathf.Round(position.z * 10f)/10f/1.5f)));
+
+		if (x == 27 + Mathf.RoundToInt(Mathf.Round(position.x * 10f) / 10f / 1.5f) &&
+		    y == 27 + Mathf.RoundToInt(Mathf.Round(position.z * 10f) / 10f / 1.5f))
+		{
+			GetComponent<MeshRenderer> ().material = startMat;
+			MyAStar.instance.grids [x, y].type = GridType.Start;
+			MyAStar.instance.openList.Add (MyAStar.instance.grids [x, y]);
+			MyAStar.instance.startX = x;
+			MyAStar.instance.startY = y;
+		}
+	}
+
 	public void SetTarget(InputAction.CallbackContext context)
 	{
 		Debug.Log("按下设置目标。");
@@ -61,6 +78,8 @@ public class Reference : MonoBehaviour
 //判断当前格子的类型
 	void OnTriggerEnter (Collider other)
 	{
+		Debug.Log("dsddss");
+		GetComponent<MeshRenderer> ().material = obstacleMat;
 		if (other.name == "Start") {
 			GetComponent<MeshRenderer> ().material = startMat;
 			MyAStar.instance.grids [x, y].type = GridType.Start;
