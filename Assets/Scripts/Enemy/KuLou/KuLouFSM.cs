@@ -18,10 +18,10 @@ public enum StateType
 public class Parameter
 {
     public int basicHP;
-    public int curDamage;
     public float moveSpeed;
     public float chaseSpeed;
     public float idleTime;
+  
     public Transform[] patrolPoints;
     public Transform[] chasePoints;
     public Transform target;
@@ -42,18 +42,16 @@ public class KuLouFSM: MonoBehaviour
     private Dictionary<StateType, State> states = new Dictionary<StateType, State>();
     public int EnemyHP;
     public Parameter parameter;
-
     private void OnEnable()
     {
         EnemyHP = parameter.basicHP * (GameSetting.DifficultyIndex + 1);
         Debug.Log("敌人血量："+EnemyHP+"=> ("+parameter.basicHP+") "+"* ("+GameSetting.DifficultyIndex + 1+")");
         ProjectAttack.hitE += getHit;
-        
     }
+    
 
     void Start()
     {
-        UpdateEnemyName();
         states.Add(StateType.Idle, new IdleState(this));
         states.Add(StateType.Patrol, new PatrolState(this));
         states.Add(StateType.Chase, new ChaseState(this));
@@ -67,17 +65,7 @@ public class KuLouFSM: MonoBehaviour
         parameter.animator = transform.GetComponent<Animator>();
     }
     
-    private void OnValidate()
-    {
-        UpdateEnemyName();
-    }
-    
-    private void UpdateEnemyName()
-    {
-        var name = "Skeleton";
-        var DamageNum = parameter.curDamage ;
-        gameObject.name = $"{name}+{DamageNum}";
-    }
+
 
     void Update()
     {

@@ -8,8 +8,9 @@ public class PlayerController : MonoBehaviour
     public static int health;
     public int mana;
     public static int curDamage = 20;
-    public static int curDefense = 0;
-    public float moveSpeed;
+    public static int curPDefense = 2;
+    public static int curMDefense = 0;
+    public static int moveSpeed = 4;
     public float jumpForce;
     public int jumpTime;
     public Transform groundPoint;
@@ -132,13 +133,23 @@ public class PlayerController : MonoBehaviour
     {
         if (other.CompareTag("EnemyAttack"))
         {
-            var enemyName = other.gameObject.transform.parent.name;
-            Debug.Log( "扣血："+int.Parse(enemyName.Substring(enemyName.LastIndexOf("+")+1)));  
-            
-            health -= int.Parse(enemyName.Substring(enemyName.LastIndexOf("+")+1));
+            var enemyName = other.gameObject.name;
+            var attackDamage = int.Parse(enemyName.Substring(enemyName.LastIndexOf(":") + 1));
+            var attackType = enemyName.Substring(0,1);
+
+            if (attackType.Equals("p"))
+            {
+                Debug.Log("(攻击类型："+attackType+" "+"扣血："+attackDamage+"物理防御："+curPDefense+")");
+                 health -= attackDamage - curPDefense;
+            }
+            else
+            {
+                Debug.Log("(攻击类型："+attackType+" "+"扣血："+attackDamage+"魔法防御："+curMDefense+")");
+                 health -= attackDamage - curMDefense;
+            }
+            ProFileUI.CurHealth = health;
             Debug.Log("目前血量"+ProFileUI.CurHealth+"/"+ProFileUI.healthMax);
             if (health <= 0) dead = true;
-            ProFileUI.CurHealth = health;
         }
     }
     

@@ -2055,8 +2055,9 @@ GameObject:
   m_Component:
   - component: {fileID: 590701177}
   - component: {fileID: 590701178}
+  - component: {fileID: 590701179}
   m_Layer: 11
-  m_Name: Attack
+  m_Name: p:4
   m_TagString: EnemyAttack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2089,6 +2090,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.5640602, y: 1.671676, z: 0.09305513}
   m_Center: {x: 0.28203025, y: 0.00794524, z: 0.0044979453}
+--- !u!114 &590701179
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 590701176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5673e3b77ef1d1e43a7c7514933c93d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 4
+  attackType: p
 --- !u!1 &597427271
 GameObject:
   m_ObjectHideFlags: 0
@@ -9928,7 +9943,7 @@ GameObject:
   - component: {fileID: 1630163364}
   - component: {fileID: 1630163365}
   m_Layer: 11
-  m_Name: Skeleton+4
+  m_Name: Skeleton
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10039,7 +10054,6 @@ MonoBehaviour:
   EnemyHP: 0
   parameter:
     basicHP: 20
-    curDamage: 4
     moveSpeed: 1
     chaseSpeed: 1
     idleTime: 2
