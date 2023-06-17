@@ -18,9 +18,11 @@ namespace Player.InventorySystem
         {
             if (other.TryGetComponent<GameItem>(out var gameItem))
             {
-                if (gameItem.Stack.Item.IsRing)
+                if (gameItem.Stack.Item.IsRing  )
                 {
-                    BuffRingInventory.AddRingsInventory(gameItem.Pick());
+                   
+                        BuffRingInventory.AddRingsInventory(gameItem.Pick());
+                    
                 }
                 else
                 {

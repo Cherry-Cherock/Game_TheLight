@@ -14,7 +14,10 @@ public class UserInfoUI : BaseUI
     private TMP_Text playerPDefense;
     private TMP_Text playerMDefense;
 
+    private TMP_Text buffNum;
+    
     private List<Image> buffs = new List<Image>();
+    private List<Button> removeBuffBtn = new List<Button>();
     private List<Image> buffsInventory = new List<Image>();
     private Image buff1;
     private Image buff2;
@@ -41,6 +44,9 @@ public class UserInfoUI : BaseUI
         playerMDefense = UnityHelper.GetTheChildNodeComponetScripts<TMP_Text>(gameObject, "playerMDefense");
         playerMDefense.text = PlayerController.curMDefense.ToString();
         
+        buffNum = UnityHelper.GetTheChildNodeComponetScripts<TMP_Text>(gameObject, "BuffNumber");
+        buffNum.text = buffNum.text ="<color=#F8913F>"+BuffRingInventory.ringsInventory.Count+"</color> / 18";
+        
         //---------------------------------角色装备的buff----------------------------------------------------
         buff1 = UnityHelper.GetTheChildNodeComponetScripts<Image>(gameObject, "BUFF1");
         buff2 = UnityHelper.GetTheChildNodeComponetScripts<Image>(gameObject, "BUFF2");
@@ -58,15 +64,21 @@ public class UserInfoUI : BaseUI
            var index = i;
            AddPointerClickEvent("bf"+i, go =>
            {
-               
                AddRingsEquip(BuffRingInventory.ringsInventory[index]);
-                
            });
        }
-       // AddPointerClickEvent("B0", go =>
-       // {
-       //     Debug.Log("a");
-       // });
+       //-------------------------------Remove buff buttons-------------------------------------------
+       for (int i = 1; i < buffs.Count+1; i++)
+       {
+           Button b = UnityHelper.GetTheChildNodeComponetScripts<Button>(gameObject, "removeButton"+i);
+           removeBuffBtn.Add(b);
+           var index = i;
+           AddPointerClickEvent("removeButton"+i, go =>
+           {
+               RemoveBuff(index);
+           });
+       }
+       
        
         AddPointerClickEvent("Button_Close", go =>
         {
@@ -79,7 +91,9 @@ public class UserInfoUI : BaseUI
     public override void Show()
     { 
         base.Show();
+        buffNum.text ="<color=#F8913F>"+BuffRingInventory.ringsInventory.Count+"</color> / 18";
         UpdatePlayerData();
+        UpdateRingsEquipUI();
         UpdateRingsInventoryUI();
     }
 
@@ -87,12 +101,13 @@ public class UserInfoUI : BaseUI
     {
         playerAttack.text = PlayerController.curDamage.ToString();
     }
-   //Resources.Load("Arts/UI/Sprites/",typeof(Sprite))as Sprite;
+    
     void UpdateRingsEquipUI()
     {
         for (int i = 0; i < BuffRingInventory.ringsEquip.Count; i++)
         {
             buffs[i].sprite = BuffRingInventory.ringsEquip[i].UiSprite;
+            removeBuffBtn[i].gameObject.SetActive(true);
         }
 
         for (int i = BuffRingInventory.ringsEquip.Count; i < buffs.Count; i++)
@@ -101,6 +116,10 @@ public class UserInfoUI : BaseUI
         }
     }
 
+    void RemoveBuff(int i)
+    {
+        Debug.Log("移除："+i);
+    }
     void UpdateRingsInventoryUI()
     {
         if (BuffRingInventory.ringsInventory.Count > 0)
@@ -112,6 +131,7 @@ public class UserInfoUI : BaseUI
                 buffsInventory[i].transform.GetChild(0).gameObject.SetActive(true);
             }
         }
+        Debug.Log(BuffRingInventory.ringsInventory.Count);
         for (int i = BuffRingInventory.ringsInventory.Count; i < buffsInventory.Count; i++)
         {
             buffsInventory[i].transform.GetChild(1).gameObject.SetActive(true);
@@ -122,14 +142,14 @@ public class UserInfoUI : BaseUI
 
     void AddRingsEquip(ItemDefinition ring)
     {
-        if (BuffRingInventory.IsRingsEquipAvaliable())
+        if (BuffRingInventory.IsRingsEquipAvaliable(ring))
         {
             BuffRingInventory.AddRingsEquip(ring);
             UpdateRingsEquipUI();
         }
         else
         {
-            Debug.Log("戒指满了");
+            Debug.Log("戒指错误");
         }
     }
 }
