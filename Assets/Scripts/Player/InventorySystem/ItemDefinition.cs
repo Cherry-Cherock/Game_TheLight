@@ -14,6 +14,8 @@ namespace Player.InventorySystem
         [SerializeField]
         private bool _isStackable;
         [SerializeField]
+        private bool _isRing;
+        [SerializeField]
         private int _effectValue;
         [SerializeField] 
         private bool _canBeUsed;
@@ -28,6 +30,8 @@ namespace Player.InventorySystem
         public string Name => _name;
         public bool IsStackable => _isStackable;
         public bool CanBeUsed => _canBeUsed;
+        
+        public bool IsRing => _isRing;
         public int EffectValue => _effectValue;
         public Sprite InGameSprite => _inGameSprite;
         public Sprite UiSprite => _uiSprite;
