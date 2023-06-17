@@ -15,6 +15,7 @@ MonoBehaviour:
   _id: 303
   _name: attackShield
   _isStackable: 0
+  _isRing: 1
   _effectValue: 0
   _canBeUsed: 0
   _inGameSprite: {fileID: 21300000, guid: bcd50bb6462b24bc4a62f2318f88e3d3, type: 3}

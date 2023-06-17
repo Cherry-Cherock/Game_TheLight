@@ -10,11 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1012e546d766ec84bb756aca82ffca80, type: 3}
-  m_Name: Shield
+  m_Name: PhysicalShield
   m_EditorClassIdentifier: 
   _id: 301
-  _name: shield
+  _name: PhysicalShield
   _isStackable: 0
+  _isRing: 1
   _effectValue: 0
   _canBeUsed: 0
   _inGameSprite: {fileID: 21300000, guid: e00201374ca2040ee847d9d26dadbcbe, type: 3}

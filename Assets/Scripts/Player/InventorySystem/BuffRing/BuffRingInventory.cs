@@ -6,32 +6,27 @@ using UnityEngine;
 
 public class BuffRingInventory : MonoBehaviour
 {
-    public static List<ItemDefinition> ringsEquip;
+    public static List<ItemDefinition> ringsEquip = new List<ItemDefinition>();
 
     public List<ItemDefinition> RingsEquip => ringsEquip;
 
 
-    public static List<ItemDefinition> ringsInventory; 
+    public static List<ItemDefinition> ringsInventory= new List<ItemDefinition>();
     public List<ItemDefinition> RingsInventory => ringsInventory;
-
-    private void Awake()
-    {
-        ringsEquip = new List<ItemDefinition>();
-        ringsInventory = new List<ItemDefinition>();
-    }
-
     
-
     public static bool IsRingsEquipAvaliable()
     {
         return ringsEquip.Count < 4;
     }
     
-    
-
     public static void AddRingsEquip(ItemDefinition ring)
     {
         ringsEquip.Add(ring);
+    }
+    
+    public static void AddRingsInventory(ItemStack itemStack)
+    {
+        ringsInventory.Add(itemStack.Item); 
     }
    
     

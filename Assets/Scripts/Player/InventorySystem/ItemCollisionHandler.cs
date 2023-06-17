@@ -16,8 +16,20 @@ namespace Player.InventorySystem
 
         private void OnTriggerEnter(Collider other)
         {
-            if(! other.TryGetComponent<GameItem>(out var gameItem) || !_inventory.CanAcceptItem(gameItem.Stack)) return;
-            _inventory.AddItem(gameItem.Pick());
+            if (other.TryGetComponent<GameItem>(out var gameItem))
+            {
+                if (gameItem.Stack.Item.IsRing)
+                {
+                    BuffRingInventory.AddRingsInventory(gameItem.Pick());
+                }
+                else
+                {
+                    if (_inventory.CanAcceptItem(gameItem.Stack))
+                    {
+                        _inventory.AddItem(gameItem.Pick());
+                    }
+                }
+            }
         }
     }
 }

@@ -15,11 +15,14 @@ public class UserInfoUI : BaseUI
     private TMP_Text playerMDefense;
 
     private List<Image> buffs = new List<Image>();
+    private List<Image> buffsInventory = new List<Image>();
     private Image buff1;
     private Image buff2;
     private Image buff3;
     private Image buff4;
-    
+
+
+    private Button b1;
     public override void Initialize()
     {
         //---------------------------------角色状态数据-----------------------------------------------------
@@ -47,6 +50,23 @@ public class UserInfoUI : BaseUI
         buffs.Add(buff2);
         buffs.Add(buff3);
         buffs.Add(buff4);
+       //---------------------------------Buff Inventory---------------------------------------------------
+       for (int i = 0; i < 18; i++)
+       {
+           Image b = UnityHelper.GetTheChildNodeComponetScripts<Image>(gameObject, "B"+i);
+           buffsInventory.Add(b);
+           var index = i;
+           AddPointerClickEvent("bf"+i, go =>
+           {
+               
+               AddRingsEquip(BuffRingInventory.ringsInventory[index]);
+                
+           });
+       }
+       // AddPointerClickEvent("B0", go =>
+       // {
+       //     Debug.Log("a");
+       // });
        
         AddPointerClickEvent("Button_Close", go =>
         {
@@ -60,13 +80,14 @@ public class UserInfoUI : BaseUI
     { 
         base.Show();
         UpdatePlayerData();
+        UpdateRingsInventoryUI();
     }
 
     void UpdatePlayerData()
     {
         playerAttack.text = PlayerController.curDamage.ToString();
     }
-//Resources.Load("Arts/UI/Sprites/",typeof(Sprite))as Sprite;
+   //Resources.Load("Arts/UI/Sprites/",typeof(Sprite))as Sprite;
     void UpdateRingsEquipUI()
     {
         for (int i = 0; i < BuffRingInventory.ringsEquip.Count; i++)
@@ -74,10 +95,29 @@ public class UserInfoUI : BaseUI
             buffs[i].sprite = BuffRingInventory.ringsEquip[i].UiSprite;
         }
 
-        for (int i = BuffRingInventory.ringsEquip.Count; i<buffs.)
+        for (int i = BuffRingInventory.ringsEquip.Count; i < buffs.Count; i++)
         {
-            
+            buffs[i].sprite = Resources.Load("Arts/UI/Sprites/Toggle_Switch_Bg",typeof(Sprite))as Sprite;
         }
+    }
+
+    void UpdateRingsInventoryUI()
+    {
+        if (BuffRingInventory.ringsInventory.Count > 0)
+        {
+            for (int i = 0; i < BuffRingInventory.ringsInventory.Count; i++)
+            {
+                buffsInventory[i].transform.GetChild(1).gameObject.SetActive(false);
+                buffsInventory[i].transform.GetChild(0).gameObject.GetComponent<Image>().sprite = BuffRingInventory.ringsInventory[i].UiSprite;
+                buffsInventory[i].transform.GetChild(0).gameObject.SetActive(true);
+            }
+        }
+        for (int i = BuffRingInventory.ringsInventory.Count; i < buffsInventory.Count; i++)
+        {
+            buffsInventory[i].transform.GetChild(1).gameObject.SetActive(true);
+            buffsInventory[i].transform.GetChild(0).gameObject.SetActive(false);
+        }
+      
     }
 
     void AddRingsEquip(ItemDefinition ring)
