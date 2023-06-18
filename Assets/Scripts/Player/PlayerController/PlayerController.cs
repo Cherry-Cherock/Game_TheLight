@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Player.InventorySystem;
 using UnityEngine;
 using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
@@ -27,8 +28,8 @@ public class PlayerController : MonoBehaviour
     public int jumpCounter;
     private bool jump;
     public LayerMask whatIsGround;
-    
-    
+
+
     public static int GetCurrentDamage()
     {
         return curDamage;
@@ -153,12 +154,4 @@ public class PlayerController : MonoBehaviour
             if (curHealth <= 0) dead = true;
         }
     }
-    
-
-    // private void OnDisable()
-    // {
-    //     
-    //     inputSystem.Player.Jump.performed -= Jump;
-    //     inputSystem.Disable();
-    // }
 }

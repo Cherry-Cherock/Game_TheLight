@@ -13,7 +13,7 @@ public class BuffsController
         if (buff.IsApply!=true && buff.Bd.Count>0)
         {
             //----------------Apply---------------------
-            buff.IsApply = true;
+            /*buff.IsApply = true;*/
             foreach (var b in buff.Bd)
             {
                 switch (b.Type)
@@ -64,12 +64,9 @@ public class BuffsController
         }
     }
 
-    public static void CloseBuff(int id)
+    public static void CloseBuff(Buff bb)
     {
-        Buff bb = FindBuffByRingId(id);
-        if (bb != null)
-        {
-            bb.IsApply = false;
+        bb.IsApply = false;
             foreach (var b in bb.Bd)
             {
                 switch (b.Type)
@@ -104,12 +101,6 @@ public class BuffsController
                         break;
                 }
             }
-
-        }
-        else
-        {
-            Debug.Log("No this buff!");
-        }
     }
 
 

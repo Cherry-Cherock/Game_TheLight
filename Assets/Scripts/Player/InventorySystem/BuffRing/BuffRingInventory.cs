@@ -8,6 +8,8 @@ public class BuffRingInventory : MonoBehaviour
 {
     public static List<ItemDefinition> ringsEquip = new List<ItemDefinition>();
     public static List<ItemDefinition> ringsInventory= new List<ItemDefinition>();
+
+    
     
     public static bool IsRingsEquipAvaliable(ItemDefinition ring)
     {
