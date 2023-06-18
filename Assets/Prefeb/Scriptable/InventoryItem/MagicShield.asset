@@ -17,7 +17,8 @@ MonoBehaviour:
   _isStackable: 0
   _isRing: 1
   _effectValue: 0
-  _canBeUsed: 1
+  _canBeUsed: 0
   _inGameSprite: {fileID: 21300000, guid: 989518b8746a84da8a894e177a896b86, type: 3}
   _uiSprite: {fileID: 21300000, guid: 989518b8746a84da8a894e177a896b86, type: 3}
-  _dropChance: 2
+  _dropChance: 0
+  _buff: {fileID: 11400000, guid: 39604ff2a1ce2ec4aa5110be417d46f6, type: 2}

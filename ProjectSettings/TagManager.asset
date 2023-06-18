@@ -10,6 +10,7 @@ TagManager:
   - Enemy
   - EnemyAttack
   - Shop
+  - PlayerAttack
   layers:
   - Default
   - TransparentFX

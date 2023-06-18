@@ -1,11 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class Buff
+[CreateAssetMenu(menuName = "Buff/Create Buff", fileName = "New buff")]
+public class Buff: ScriptableObject
 {
+    [SerializeField]
     private int _ringId;
+    
+    [SerializeField]
     private List<BuffDefinition> _bd;
+    
+    [SerializeField]
     private bool _isApply;
     public Buff(int ringId ,List<BuffDefinition> bd)
     {

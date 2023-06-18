@@ -25,7 +25,10 @@ namespace Player.InventorySystem
         private Sprite _uiSprite;
         [SerializeField] 
         private int _dropChance;
+        [SerializeField] 
+        private Buff _buff;
 
+        
         public int Id => _id;
         public string Name => _name;
         public bool IsStackable => _isStackable;
@@ -35,6 +38,8 @@ namespace Player.InventorySystem
         public Sprite InGameSprite => _inGameSprite;
         public Sprite UiSprite => _uiSprite;
         public int DropChance => _dropChance;
+
+        public Buff Buff => _buff;
     }
 }
 

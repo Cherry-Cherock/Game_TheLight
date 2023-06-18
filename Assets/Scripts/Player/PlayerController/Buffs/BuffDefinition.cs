@@ -1,33 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;using TMPro.Examples;
 using UnityEngine;
-
-public class BuffDefinition 
+[CreateAssetMenu(menuName = "Buff/Create BuffDefinition", fileName = "New buff")]
+public class BuffDefinition : ScriptableObject
 {
-    private int _id;
-    private int _uid;
+    [SerializeField]
     private int _type;
+    [SerializeField]
     private int _option;
+    [SerializeField]
     private int _amount;
-    
 
-    //option 1=>加 2=>减 3=>乘 4=>除
-    public BuffDefinition(int type,int option, int amount)
-    { 
-        _uid++;
-        _id = _uid;
-       _type = type;
-       _option = option;
-       _amount = amount;
-       
-    }
-    
-    public int Id   
-    {
-        get { return _id; }   
-        set { _id = value; }  
-    }
-    
+
+
     public int Type
     {
         get { return _type; }

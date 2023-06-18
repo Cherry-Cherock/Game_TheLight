@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class RingAndBuff 
 {
-    //true: apply false: close
+    /*//true: apply false: close
     public static void ApplyCloseBuffByRing(bool b, ItemDefinition ring)
     {
         if (b)
@@ -36,5 +36,5 @@ public class RingAndBuff
         {
             BuffsController.CloseBuff(ring.Id);
         }
-    }
+    }*/
 }
