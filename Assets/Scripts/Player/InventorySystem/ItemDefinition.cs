@@ -30,7 +30,6 @@ namespace Player.InventorySystem
         public string Name => _name;
         public bool IsStackable => _isStackable;
         public bool CanBeUsed => _canBeUsed;
-        
         public bool IsRing => _isRing;
         public int EffectValue => _effectValue;
         public Sprite InGameSprite => _inGameSprite;

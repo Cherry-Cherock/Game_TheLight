@@ -126,11 +126,10 @@ namespace Player.InventorySystem
                     //如果是血瓶
                     if (_slots[atIndex].Item.Name.Equals("Health Potion"))
                     {
-                        PlayerController.health += _slots[atIndex].Item.EffectValue;
+                        PlayerController.curHealth += _slots[atIndex].Item.EffectValue;
                         //不超出血量最大值
                         HPMaxLimit();
-                        ProFileUI.CurHealth = PlayerController.health;
-                        Debug.Log("目前血量"+ProFileUI.CurHealth+"/"+ProFileUI.healthMax);
+                        Debug.Log("目前血量"+PlayerController.curHealth+"/"+PlayerController.healthMax);
                         _slots[atIndex].NumberOfItems--;
                     }
                     //如果消耗完，清空插槽。
@@ -189,9 +188,9 @@ namespace Player.InventorySystem
 
         public void HPMaxLimit()
         {
-            PlayerController.health = PlayerController.health >= ProFileUI.healthMax
-                ? ProFileUI.healthMax
-                : PlayerController.health;
+            PlayerController.curHealth = PlayerController.curHealth >= PlayerController.healthMax
+                ? PlayerController.healthMax
+                : PlayerController.curHealth;
         }
     }
 }

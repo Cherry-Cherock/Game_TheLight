@@ -40,10 +40,10 @@ public class ProjectAttack : MonoBehaviour
     {
         if (destoryed == false)
         {
-            if (other.CompareTag("Enemy"))
+            /*if (other.CompareTag("Enemy"))
             {
                 hitE.Invoke();
-            }
+            }*/
             Destroy(gameObject);
         }
     }

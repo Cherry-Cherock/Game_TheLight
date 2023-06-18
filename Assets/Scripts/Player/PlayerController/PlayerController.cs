@@ -1,11 +1,13 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     //---------Player Setting--------------------
-    public static int health;
+    public static int healthMax = 20;
+    public static int curHealth;
     public int mana;
     public static int curDamage = 20;
     public static int curPDefense = 2;
@@ -69,7 +71,7 @@ public class PlayerController : MonoBehaviour
 
     private void init()
     {
-        health = ProFileUI.healthMax;
+        curHealth = healthMax;
         inputSystem.Enable();
         jumpCounter = jumpTime;
         jump = false;
@@ -140,16 +142,15 @@ public class PlayerController : MonoBehaviour
             if (attackType.Equals("p"))
             {
                 Debug.Log("(攻击类型："+attackType+" "+"扣血："+attackDamage+"物理防御："+curPDefense+")");
-                 health -= attackDamage - curPDefense;
+                curHealth -= attackDamage - curPDefense;
             }
             else
             {
                 Debug.Log("(攻击类型："+attackType+" "+"扣血："+attackDamage+"魔法防御："+curMDefense+")");
-                 health -= attackDamage - curMDefense;
+                curHealth -= attackDamage - curMDefense;
             }
-            ProFileUI.CurHealth = health;
-            Debug.Log("目前血量"+ProFileUI.CurHealth+"/"+ProFileUI.healthMax);
-            if (health <= 0) dead = true;
+            Debug.Log("目前血量"+curHealth+"/"+healthMax);
+            if (curHealth <= 0) dead = true;
         }
     }
     

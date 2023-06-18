@@ -46,7 +46,7 @@ public class KuLouFSM: MonoBehaviour
     {
         EnemyHP = parameter.basicHP * (GameSetting.DifficultyIndex + 1);
         Debug.Log("敌人血量："+EnemyHP+"=> ("+parameter.basicHP+") "+"* ("+GameSetting.DifficultyIndex + 1+")");
-        ProjectAttack.hitE += getHit;
+        /*ProjectAttack.hitE += getHit;*/
     }
     
 
@@ -124,6 +124,10 @@ public class KuLouFSM: MonoBehaviour
         {
             parameter.target = other.transform;
         }
+        if (other.CompareTag("PlayerAttack"))
+        {
+            parameter.getHit = true;
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -134,10 +138,10 @@ public class KuLouFSM: MonoBehaviour
         }
     }
 
-    public void getHit()
+    /*public void getHit()
     {
         parameter.getHit = true;
-    }
+    }*/
 
     private void OnDrawGizmos()
     {

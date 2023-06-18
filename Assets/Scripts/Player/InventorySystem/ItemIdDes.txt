@@ -19,8 +19,17 @@
 203 => 散弹枪 => 伤害：15
 204 => 狙击枪 => 伤害：20
 
-//buff 300-399
-300 => 魔法盾牌 => 受到的魔法伤害/2 
-301 => 物理盾牌 => 受到的物理伤害/2
-302 => 怪兽盾牌 => 增加敌人的攻击，但是掉落的物品数量+1
-303 => 勇士盾牌 => 增加50%当前攻击力
+
+//buff id:300-399
+Id     Name              Buff
+300 => magicShield    => Magic damage received -50%.
+301 => physicalShield => Physical damage received - 50%.
+302 => monsterShield  => Increases enemy attacks +20%, but +1 for the number of loots.
+303 => warriorShield  => Increases current player basic attack +50%.
+304 => luckyGrass     => The player's basic attack becomes random (0~20).
+305 => hourglass      => Enemies move slower.
+
+//Weapons id:200-299
+Id     Name         Damage     Ammo 
+200 => handgun  =>  5 *    =>  6/12
+201 => crossbow =>  8 *    =>  1/-

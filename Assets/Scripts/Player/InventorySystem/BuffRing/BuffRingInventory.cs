@@ -7,16 +7,10 @@ using UnityEngine;
 public class BuffRingInventory : MonoBehaviour
 {
     public static List<ItemDefinition> ringsEquip = new List<ItemDefinition>();
-
-    public List<ItemDefinition> RingsEquip => ringsEquip;
-
-
     public static List<ItemDefinition> ringsInventory= new List<ItemDefinition>();
-    public List<ItemDefinition> RingsInventory => ringsInventory;
     
     public static bool IsRingsEquipAvaliable(ItemDefinition ring)
     {
-
         foreach (var e in ringsEquip)
         {
             if (e.Name.Equals(ring.Name))
@@ -27,7 +21,17 @@ public class BuffRingInventory : MonoBehaviour
         return ringsEquip.Count < 4;
     }
     
-
+    public static bool IsRingsInventoryAvaliable(GameObject ring)
+    {
+        foreach (var e in ringsInventory)
+        {
+            if (e.Name.Equals(ring.GetComponent<GameItem>().Stack.Item.Name))
+            {
+                return false;
+            }
+        }
+        return ringsInventory.Count < 19;
+    }
     
     
     

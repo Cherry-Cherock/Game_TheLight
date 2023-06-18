@@ -7,8 +7,6 @@ using UnityEngine.UI;
 public class ProFileUI : MonoBehaviour
 {
     //HP
-    public static int CurHealth;
-    public static int healthMax = 20;
     private Image HPBar;
     
     //mana
@@ -17,7 +15,6 @@ public class ProFileUI : MonoBehaviour
     private Image ManaBar;
     void Start()
     {
-        CurHealth = healthMax;
         CurMana = manaMax;
         HPBar = UnityHelper.GetTheChildNodeComponetScripts<Image>(gameObject, "HP");
         ManaBar = UnityHelper.GetTheChildNodeComponetScripts<Image>(gameObject, "Mana");
@@ -25,7 +22,7 @@ public class ProFileUI : MonoBehaviour
     
     void Update()
     {
-        HPBar.fillAmount = (float)CurHealth / (float)healthMax;
+        HPBar.fillAmount = (float)PlayerController.curHealth / (float)PlayerController.healthMax;
         ManaBar.fillAmount = (float)CurMana / (float)manaMax;
     }
 }
