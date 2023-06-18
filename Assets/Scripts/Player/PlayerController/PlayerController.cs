@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     public int mana;
     public static int curDamage = 20;
     public static int curPDefense = 2;
-    public static int curMDefense = 0;
+    public static int curMDefense = 2;
     public static int moveSpeed = 4;
     public float jumpForce;
     public int jumpTime;
@@ -142,12 +142,12 @@ public class PlayerController : MonoBehaviour
             if (attackType.Equals("p"))
             {
                 Debug.Log("(攻击类型："+attackType+" "+"扣血："+attackDamage+"物理防御："+curPDefense+")");
-                curHealth -= attackDamage - curPDefense;
+                curHealth -= attackDamage - curPDefense > 0 ? attackDamage - curPDefense : 0;
             }
             else
             {
                 Debug.Log("(攻击类型："+attackType+" "+"扣血："+attackDamage+"魔法防御："+curMDefense+")");
-                curHealth -= attackDamage - curMDefense;
+                curHealth -= attackDamage - curMDefense > 0 ? attackDamage - curMDefense : 0;
             }
             Debug.Log("目前血量"+curHealth+"/"+healthMax);
             if (curHealth <= 0) dead = true;

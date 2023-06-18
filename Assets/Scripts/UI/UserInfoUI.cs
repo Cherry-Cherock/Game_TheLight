@@ -131,6 +131,7 @@ public class UserInfoUI : BaseUI
         Debug.Log("移除："+i);
         buffs[i-1].sprite = Resources.Load("Arts/UI/Sprites/Toggle_Switch_Bg",typeof(Sprite))as Sprite;
         /*RingAndBuff.ApplyCloseBuffByRing(false, BuffRingInventory.ringsEquip[i-1]);*/
+       BuffsController.CloseBuff(BuffRingInventory.ringsEquip[i-1].Id);
         BuffRingInventory.ringsEquip.RemoveAt(i-1);
         UpdateRingsEquipUI();
         UpdatePlayerData();
@@ -163,6 +164,7 @@ public class UserInfoUI : BaseUI
         if (BuffRingInventory.IsRingsEquipAvaliable(ring))
         {
             BuffRingInventory.AddRingsEquip(ring);
+            BuffsController.ApplyBuff(ring.Buff);
             /*RingAndBuff.ApplyCloseBuffByRing(true,ring);*/
             UpdateRingsEquipUI();
             UpdatePlayerData();

@@ -139,10 +139,10 @@ public class BuffsController
                 cur -= ac? am : -am;
                 break;
             case 3:
-                cur = ac? PlayerController.healthMax * am : PlayerController.healthMax/am; 
+                cur = ac? cur * am : cur / am; 
                 break;
             case 4:
-                cur = ac? PlayerController.healthMax / am : PlayerController.healthMax*am;
+                cur = ac? cur / am : cur * am;
                 break;
         }
 
