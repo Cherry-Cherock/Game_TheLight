@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
@@ -150,6 +151,7 @@ public class PlayerAttack : MonoBehaviour
 
         private void Shoot()
         {
+            CheckPlayerStateBeforeShoot();
             if (Input.GetMouseButtonDown(0) && GameManager.currentGameState == GameManager.GameState.RUNNING)
             {
                 var projectile = Instantiate(projectilePrefab, prefabSpawn.position, Quaternion.identity);
@@ -207,4 +209,15 @@ public class PlayerAttack : MonoBehaviour
         }
 
         #endregion
+
+        public void CheckPlayerStateBeforeShoot()
+        {
+            foreach (var e in BuffsController.curStates)
+            {
+                if (e == PlayerController.StateKind.randomBasicDamage)
+                {
+                    PlayerController.curBasicDamage = new System.Random().Next(0, 20);
+                }
+            }
+        }
 }

@@ -10,7 +10,8 @@ public class PlayerController : MonoBehaviour
     public static int healthMax = 20;
     public static int curHealth;
     public int mana;
-    public static int curDamage = 20;
+    public static int curBasicDamage = 20;
+    public static int curWeaponDamage = 0;
     public static int curPDefense = 2;
     public static int curMDefense = 2;
     public static int moveSpeed = 4;
@@ -29,10 +30,16 @@ public class PlayerController : MonoBehaviour
     private bool jump;
     public LayerMask whatIsGround;
 
+    public enum StateKind
+    {
+        randomBasicDamage,
+        GodDefendBuff,
+        SteelHeartBuff,
+    }
 
     public static int GetCurrentDamage()
     {
-        return curDamage;
+        return curBasicDamage + curWeaponDamage;
     }
     
     private void Awake()

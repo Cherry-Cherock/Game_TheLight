@@ -34,7 +34,7 @@ public class UserInfoUI : BaseUI
         playerHP.text = PlayerController.healthMax.ToString();
         
         playerAttack = UnityHelper.GetTheChildNodeComponetScripts<TMP_Text>(gameObject, "playerAttack");
-        playerAttack.text = PlayerController.curDamage.ToString();
+        playerAttack.text = PlayerController.curBasicDamage+ "+ ("+PlayerController.curWeaponDamage+")";
         
         playerSpeed = UnityHelper.GetTheChildNodeComponetScripts<TMP_Text>(gameObject, "playerSpeed");
         playerSpeed.text = PlayerController.moveSpeed.ToString();
@@ -101,7 +101,7 @@ public class UserInfoUI : BaseUI
     void UpdatePlayerData()
     {
         buffNum.text ="<color=#F8913F>"+BuffRingInventory.ringsInventory.Count+"</color> / 18";
-        playerAttack.text = PlayerController.curDamage.ToString();
+        playerAttack.text = BuffsController.curStates.Contains(PlayerController.StateKind.randomBasicDamage) ?  "???" : PlayerController.curBasicDamage+ "+ ("+PlayerController.curWeaponDamage+")";
         playerHP.text = PlayerController.healthMax.ToString();
         playerSpeed.text = PlayerController.moveSpeed.ToString();
         playerPDefense.text = PlayerController.curPDefense.ToString();
@@ -130,7 +130,6 @@ public class UserInfoUI : BaseUI
     {
         Debug.Log("移除："+i);
         buffs[i-1].sprite = Resources.Load("Arts/UI/Sprites/Toggle_Switch_Bg",typeof(Sprite))as Sprite;
-        /*RingAndBuff.ApplyCloseBuffByRing(false, BuffRingInventory.ringsEquip[i-1]);*/
         BuffsController.CloseBuff(BuffRingInventory.ringsEquip[i-1].Buff);
         BuffRingInventory.ringsEquip[i - 1].Buff.IsApply = false;
         BuffRingInventory.ringsEquip.RemoveAt(i-1);
@@ -166,7 +165,6 @@ public class UserInfoUI : BaseUI
         {
             BuffRingInventory.AddRingsEquip(ring);
             BuffsController.ApplyBuff(ring.Buff);
-            /*RingAndBuff.ApplyCloseBuffByRing(true,ring);*/
             UpdateRingsEquipUI();
             UpdatePlayerData();
         }

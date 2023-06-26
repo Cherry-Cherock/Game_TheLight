@@ -135,7 +135,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 81a1427cd47ec49ee8b922f22b81bb54,
+      objectReference: {fileID: 21300000, guid: cec60a7055c064a05995347d1814bd9c,
         type: 3}
     - target: {fileID: 2023485578591291491, guid: f176b3cc80756394c91ebfd61a2797c7,
         type: 3}
@@ -196,7 +196,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _stack._item
       value: 
-      objectReference: {fileID: 11400000, guid: 80d7c452a3f331a40aad523ccda989b7,
+      objectReference: {fileID: 11400000, guid: bcd01cf74fbd38d428afa5bd4bf2a901,
         type: 2}
     - target: {fileID: 2023485578591291517, guid: f176b3cc80756394c91ebfd61a2797c7,
         type: 3}
@@ -211,7 +211,7 @@ PrefabInstance:
     - target: {fileID: 2023485578591291518, guid: f176b3cc80756394c91ebfd61a2797c7,
         type: 3}
       propertyPath: m_Name
-      value: Chicken (ns)
+      value: LuckyGrass (ns)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f176b3cc80756394c91ebfd61a2797c7, type: 3}
@@ -10895,7 +10895,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyHP: 0
   parameter:
-    basicHP: 20
+    basicHP: 500
     moveSpeed: 1
     chaseSpeed: 1
     idleTime: 2

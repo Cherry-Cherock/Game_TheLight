@@ -142,8 +142,8 @@ namespace Player.InventorySystem
                 else if (_slots[atIndex].Item.Id >= 200 && _slots[atIndex].Item.Id <= 299)
                 {
                     Debug.Log("是武器");
-                    PlayerController.curDamage = _slots[atIndex].Item.EffectValue;
-                    Debug.Log("攻击改为："+PlayerController.curDamage);
+                    PlayerController.curWeaponDamage = _slots[atIndex].Item.EffectValue;
+                    Debug.Log("武器攻击改为："+PlayerController.curWeaponDamage);
                     ClearSlot(atIndex);
                 }
             }

@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1012e546d766ec84bb756aca82ffca80, type: 3}
+  m_Name: LuckyGrass
+  m_EditorClassIdentifier: 
+  _id: 304
+  _name: LuckyGrass
+  _isStackable: 0
+  _isRing: 1
+  _effectValue: 0
+  _canBeUsed: 0
+  _inGameSprite: {fileID: 21300000, guid: cec60a7055c064a05995347d1814bd9c, type: 3}
+  _uiSprite: {fileID: 21300000, guid: cec60a7055c064a05995347d1814bd9c, type: 3}
+  _dropChance: 0
+  _buff: {fileID: 11400000, guid: 5d11852af32e98e489c3576967b5da78, type: 2}

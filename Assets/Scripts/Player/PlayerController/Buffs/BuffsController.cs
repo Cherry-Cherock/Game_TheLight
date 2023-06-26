@@ -7,13 +7,16 @@ public class BuffsController
 {
     //player current buffs
     public static List<Buff> curBuffs = new List<Buff>();
-    
+    //player current state
+    public static List<PlayerController.StateKind> curStates = new List<PlayerController.StateKind>();
+
+    //----------------some default data---------------------
+    private static int dPlayerBasicDamage = 0;
     public static void ApplyBuff(Buff buff)
     {
         if (buff.IsApply!=true && buff.Bd.Count>0)
         {
             //----------------Apply---------------------
-            /*buff.IsApply = true;*/
             foreach (var b in buff.Bd)
             {
                 switch (b.Type)
@@ -28,7 +31,7 @@ public class BuffsController
                         break;
                     //player basic attack
                     case 3:
-                        PlayerController.curDamage = HandleChange(PlayerController.curDamage, true, b.Option, b.Amount);
+                        PlayerController.curBasicDamage = HandleChange(PlayerController.curBasicDamage, true, b.Option, b.Amount);
                         break;
                     //player PDefense
                     case 4:
@@ -38,13 +41,10 @@ public class BuffsController
                     case 5:
                         PlayerController.curMDefense = HandleChange(PlayerController.curMDefense, true, b.Option, b.Amount);
                         break;
-                    //player jump
-                    case 6: 
-                       
-                        break;
-                    //enemy speed
-                    case 7:
-                        
+                    //Lucky Grass
+                    case 6:
+                        dPlayerBasicDamage = PlayerController.curBasicDamage;
+                        HandleLuckyGrassChange(true);
                         break;
                 }
             }
@@ -81,7 +81,7 @@ public class BuffsController
                         break;
                     //player basic attack
                     case 3:
-                        PlayerController.curDamage = HandleChange(PlayerController.curDamage, false, b.Option, b.Amount);
+                        PlayerController.curBasicDamage = HandleChange(PlayerController.curBasicDamage, false, b.Option, b.Amount);
                         break;
                     //player PDefense
                     case 4:
@@ -91,13 +91,9 @@ public class BuffsController
                     case 5:
                         PlayerController.curMDefense = HandleChange(PlayerController.curMDefense, false, b.Option, b.Amount);
                         break;
-                    //player jump
+                    //Lucky Grass
                     case 6: 
-                       
-                        break;
-                    //enemy speed
-                    case 7:
-                        
+                       HandleLuckyGrassChange(false);
                         break;
                 }
             }
@@ -118,6 +114,7 @@ public class BuffsController
     }
 
 
+    // ac-> true: apply , false: close
     public static int HandleChange(int cur, bool ac, int op, int am)
     {
         //apply/close buff
@@ -138,6 +135,20 @@ public class BuffsController
         }
 
         return cur;
+    }
+
+    public static void HandleLuckyGrassChange(bool ac)
+    {
+        if (ac)
+        {
+            curStates.Add(PlayerController.StateKind.randomBasicDamage);
+        }
+        else
+        {
+            curStates.Remove(PlayerController.StateKind.randomBasicDamage);
+            PlayerController.curBasicDamage = dPlayerBasicDamage;
+            dPlayerBasicDamage = 0;
+        }
     }
     
     

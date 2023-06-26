@@ -9,7 +9,7 @@ public class Buff: ScriptableObject
     
     [SerializeField]
     private List<BuffDefinition> _bd;
-    
+ 
     [SerializeField]
     private bool _isApply;
     public Buff(int ringId ,List<BuffDefinition> bd)
@@ -29,7 +29,7 @@ public class Buff: ScriptableObject
         get { return _bd; }   
         set { _bd = value;}  
     }
-    
+
     public bool IsApply  
     {
         get { return _isApply; }   

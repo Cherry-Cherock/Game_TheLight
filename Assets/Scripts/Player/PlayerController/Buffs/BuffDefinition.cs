@@ -10,9 +10,7 @@ public class BuffDefinition : ScriptableObject
     private int _option;
     [SerializeField]
     private int _amount;
-
-
-
+    
     public int Type
     {
         get { return _type; }

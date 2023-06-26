@@ -30,17 +30,21 @@ Id     Name              Buff
 305 => hourglass      => Enemies move slower.
 
 //buff definition
-type   
-1      player health
-2      player speed
-3      player basic attack
-4      player PDefense
-5      player MDefense
-option 
-1=>加 
-2=>减 
-3=>乘 
-4=>除
+ID      Buff type   
+1   =   player health
+2   =   player speed
+3   =   player basic attack
+4   =   player PDefense
+5   =   player MDefense
+6   =   luckyGrass *
+
+ID      Buff option 
+1   =>  add 
+2   =>  subtract
+3   =>  multiply
+4   =>  divide
+
+
 
 
 
