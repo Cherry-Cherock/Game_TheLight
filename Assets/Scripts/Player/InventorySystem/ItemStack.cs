@@ -14,7 +14,11 @@ namespace Player.InventorySystem
         private int _numberOfItems;
 
         public bool IsStackable => _item != null && _item.IsStackable;
-        public ItemDefinition Item => _item;
+        public ItemDefinition Item
+        {
+            get => _item;
+            set => _item = value;
+        }
 
         public void SetItem(ItemDefinition i)
         {

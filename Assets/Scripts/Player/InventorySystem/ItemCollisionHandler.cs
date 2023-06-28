@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Player.InventorySystem
@@ -26,6 +23,10 @@ namespace Player.InventorySystem
                         return;
                     }
                     BuffRingInventory.AddRingsInventory(gameItem.Pick());
+                }else if (gameItem.Stack.Item.Id==1)
+                {
+                    //is gold
+                    _inventory.AddGold(gameItem.Pick());
                 }
                 else
                 {

@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     //---------Player Setting--------------------
     public static int healthMax = 20;
     public static int curHealth;
+    public static int curGold = 0;
     public int mana;
     public static int curBasicDamage = 20;
     public static int curWeaponDamage = 0;

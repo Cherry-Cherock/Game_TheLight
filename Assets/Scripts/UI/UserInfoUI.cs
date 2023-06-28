@@ -14,6 +14,7 @@ public class UserInfoUI : BaseUI
     private TMP_Text playerPDefense;
     private TMP_Text playerMDefense;
 
+    private TMP_Text playerGoldNum;
     private TMP_Text buffNum;
     
     private List<Image> buffs = new List<Image>();
@@ -48,6 +49,8 @@ public class UserInfoUI : BaseUI
         buffNum = UnityHelper.GetTheChildNodeComponetScripts<TMP_Text>(gameObject, "BuffNumber");
         buffNum.text = buffNum.text ="<color=#F8913F>"+BuffRingInventory.ringsInventory.Count+"</color> / 18";
         
+        playerGoldNum = UnityHelper.GetTheChildNodeComponetScripts<TMP_Text>(gameObject, "GoldNum");
+        playerGoldNum.text = PlayerController.curGold.ToString();
         //---------------------------------Equipped buff rings----------------------------------------------------
         buff1 = UnityHelper.GetTheChildNodeComponetScripts<Image>(gameObject, "BUFF1");
         buff2 = UnityHelper.GetTheChildNodeComponetScripts<Image>(gameObject, "BUFF2");
@@ -106,6 +109,7 @@ public class UserInfoUI : BaseUI
         playerSpeed.text = PlayerController.moveSpeed.ToString();
         playerPDefense.text = PlayerController.curPDefense.ToString();
         playerMDefense.text = PlayerController.curMDefense.ToString();
+        playerGoldNum.text = PlayerController.curGold.ToString();
     }
     
     void UpdateRingsEquipUI()

@@ -81,7 +81,7 @@ namespace Player.InventorySystem
             }
             return _slots.Count(slot => slot.Item == itemStack.Item) >= itemStack.NumberOfItems;
         }
-        public ItemStack AddItem(ItemStack itemStack)
+        public  ItemStack AddItem(ItemStack itemStack)
         {
             var relevantSlot = FindSlot(itemStack.Item, true);
             if (IsFull() && relevantSlot == null)
@@ -99,6 +99,11 @@ namespace Player.InventorySystem
                 relevantSlot.State = itemStack;
             }
             return relevantSlot.State;
+        }
+
+        public void AddGold(ItemStack itemStack)
+        {
+            PlayerController.curGold += itemStack.NumberOfItems;
         }
         
         public ItemStack RemoveItem(int atIndex, bool spawn = false)
